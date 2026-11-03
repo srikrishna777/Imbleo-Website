@@ -1,0 +1,32 @@
+IMBLEO WEBSITE
+
+ready-to-host/
+The complete static website. Upload the CONTENTS of this folder to your web host.
+Includes the homepage, 11 case-study detail pages, a searchable work index,
+and the supplied interactive Business Anatomy application at /business-anatomy/.
+
+editable-source/
+The source project. No npm package installation is required.
+From this folder, run:
+  npm run build
+  npm run check
+  npm run dev
+Then open http://localhost:4173.
+
+Do not open ready-to-host/index.html directly through file://.
+The site uses module scripts and root-relative routes, so use an HTTP server.
+
+The contact flow prepares an email draft addressed to adiedubus@gmail.com,
+the contact provided in the source portfolio. No enquiry is sent automatically.
+Update the address in editable-source/scripts/build.mjs and
+editable-source/public/assets/app.js when the company inbox is ready.
+
+Case studies are labelled as the team's prior experience. Delivered, partly
+delivered, solution-design, and prototype statuses and metric notes are retained.
+Mock interfaces are clearly illustrative and use fictional sample data.
+
+CHECKS
+Passed: JavaScript syntax, 15 page routes, asset and module links, fragment links,
+generated-page IDs and ARIA references, and original metric qualifications.
+Browser layout and runtime interaction checks could not run in this environment.
+Publication could not complete because the remote source host was unreachable.
