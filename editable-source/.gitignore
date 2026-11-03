@@ -3,3 +3,4 @@
 *.zip
 node_modules/
 preview/
+dist/

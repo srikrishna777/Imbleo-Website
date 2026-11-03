@@ -1,13 +1,13 @@
 <section class="hero wrap">
   <div class="hero-grid">
     <div>
-      <p class="eyebrow"><span class="live-dot"></span> BUSINESS FIRST. TECHNOLOGY THAT FOLLOWS.</p>
-      <h1>Your business.<br>Better connected<span class="period">.</span></h1>
-      <div class="hero-actions"><button class="button dark" data-contact>Let’s build together {{icon:arrow-up-right}}</button><a class="button light" href="/work/">Explore our work {{icon:arrow-right}}</a></div>
+      <p class="eyebrow" data-reveal><span class="live-dot"></span> BUSINESS FIRST. TECHNOLOGY THAT FOLLOWS.</p>
+      <h1 data-split>Your business.<br>Better connected<span class="period">.</span></h1>
+      <div class="hero-actions" data-reveal><button class="button dark" data-contact>Let’s build together {{icon:arrow-up-right}}</button><a class="button light" href="/work/">Explore our work {{icon:arrow-right}}</a></div>
     </div>
-    <div class="hero-aside"><span class="tiny-cube">{{icon:cube}}</span><p>Good software starts with<br class="desktop-br"> understanding your business.</p><p class="muted">We bring Zoho consulting, embedded engineering, vertical SaaS, and custom software together to turn disconnected work into a business that flows.</p><a class="text-link" href="#services">Meet your next technology partner {{icon:arrow-down}}</a></div>
+    <div class="hero-aside" data-reveal><span class="tiny-cube">{{icon:cube}}</span><p>Good software starts with<br class="desktop-br"> understanding your business.</p><a class="text-link" href="#partner">Meet your next technology partner {{icon:arrow-down}}</a></div>
   </div>
-  <div class="workspace-stage">
+  <div class="workspace-stage" data-reveal>
     <div class="stage-glow glow-one"></div><div class="stage-glow glow-two"></div>
     <div class="stage-topline"><span><span class="live-dot"></span> A MORE CONNECTED WAY TO WORK</span><span>One business. One shared picture.</span></div>
     <div class="app-switcher" role="tablist" aria-label="Explore a connected business">
@@ -24,19 +24,118 @@
     </div>
     <div class="stage-footer"><span>{{icon:cursor}} Choose a workspace to look inside</span><span>Built around the way you work {{icon:arrow-up-right}}</span></div>
   </div>
-  <div class="ecosystem-strip"><span>Deep in Zoho.<br><strong>Connected to your world.</strong></span><span class="zoho-logo"><i>Z</i><i>O</i><i>H</i><i>O</i></span><span class="stack-word">Salesforce</span><span class="stack-word xero">xero</span><span class="stack-word"><span class="ms-mark">▦</span> Microsoft 365</span><span class="stack-word google">Google <small>Workspace</small></span><span class="stack-word api-word">{ APIs }</span></div>
+  <div class="logo-strip" data-reveal>
+    <span class="logo-strip-label">Works with your stack.<br><strong>Connected to your world.</strong></span>
+    <div class="logo-marquee" aria-label="Logo placeholders"><div class="logo-track">{{logo-placeholders}}</div></div>
+  </div>
 </section>
 
-<section class="intro-section wrap section-space" id="about"><div class="section-kicker"><span class="section-index">01 / THE WAY WE THINK</span><span class="small-cross">+</span></div><div class="intro-grid"><h2>Start with the business.<br>Build what makes<br><span class="muted">it work better.</span></h2><div class="intro-copy"><p>Every business has its own moving parts. The tools, the people, the unwritten processes that somehow keep everything running.</p><p class="muted">We connect those parts. We get close to your operations, find the friction, and build the right mix of systems, software, and automation to move you forward.</p><a class="text-link" href="/business-anatomy/">See the business behind the software {{icon:arrow-up-right}}</a></div></div></section>
+<section class="partner-section wrap" id="partner">
+  <div class="partner-head">
+    <div><p class="partner-kicker" data-reveal>From messy problem to momentum</p><h2 data-split>How we partner.</h2></div>
+    <p class="muted" data-reveal>A first version you can see, a quote you can sign and a kickoff your team is part of. Clear value at every step.</p>
+  </div>
+  <div class="partner-board" data-partner>
+    <div class="partner-cards">
+      <article class="pcard pcard-proto" aria-hidden="true">
+        <div class="pcard-bar"><span>Job tracker</span><span class="pcard-pill proto"><i></i>Prototype</span></div>
+        <div class="pcard-body">
+          <div class="pcard-kpi"><div><small>Jobs this week</small><span class="pcard-skel"></span></div><span class="pcard-bars dashed"><i style="--h:30%"></i><i style="--h:45%"></i><i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:80%"></i></span></div>
+          <small class="pcard-sub">Jobs by crew</small>
+          <div class="pcard-row"><span class="pcard-box"></span>Crew A<span class="pcard-dash"></span><em>Draft</em></div>
+          <div class="pcard-row"><span class="pcard-box"></span>Crew B<span class="pcard-dash"></span><em>Draft</em></div>
+          <div class="pcard-row faded"><span class="pcard-box"></span>Crew C<span class="pcard-dash"></span><em>Draft</em></div>
+        </div>
+        <div class="pcard-pop pop-comment"><span class="pcard-avatar">M</span><div><b>Maya, Operations</b><p>Can we flag jobs waiting on parts?</p></div><time>2m</time></div>
+      </article>
+      <article class="pcard pcard-quote" aria-hidden="true">
+        <div class="pcard-bar"><span>Quote Q-0142</span><span class="pcard-pill ready"><i></i>Ready to sign</span></div>
+        <div class="pcard-body">
+          <div class="pcard-kpi"><div><small>Fixed quote</small><strong class="pcard-total">$<span data-count="18400">18,400</span></strong></div><span class="pcard-stamp">{{icon:file}}</span></div>
+          <small class="pcard-sub">Agreed scope</small>
+          <div class="pcard-row qline"><span class="pcard-tick">{{icon:check}}</span>Discovery &amp; design<em>4,200</em></div>
+          <div class="pcard-row qline"><span class="pcard-tick">{{icon:check}}</span>Build &amp; connect<em>11,600</em></div>
+          <div class="pcard-row qline"><span class="pcard-tick">{{icon:check}}</span>Training &amp; handover<em>2,600</em></div>
+        </div>
+        <div class="pcard-pop pop-sign"><svg class="signature" viewBox="0 0 160 44"><path d="M6 30c10-14 16-22 20-20s-6 22-2 24 12-20 18-20-2 18 3 18 9-14 14-14 1 12 6 12 10-10 16-10 4 8 10 8 12-8 18-8 10 4 16 2"/></svg><div class="sign-meta"><span>Signed by your team</span><b class="sign-pill">{{icon:check}} Signed</b></div></div>
+      </article>
+      <article class="pcard pcard-kick" aria-hidden="true">
+        <div class="pcard-bar"><span>Kickoff plan</span><span class="pcard-pill live"><i></i>Live</span></div>
+        <div class="pcard-body">
+          <div class="pcard-kpi"><div><small>Week one</small><strong>On track</strong></div><span class="pcard-team"><i>A</i><i>J</i><i>M</i><i>+3</i></span></div>
+          <small class="pcard-sub">First steps</small>
+          <div class="pcard-row kline"><span class="pcard-tick">{{icon:check}}</span>Kickoff workshop<em>Mon</em></div>
+          <div class="pcard-row kline"><span class="pcard-tick">{{icon:check}}</span>Access &amp; environments<em>Tue</em></div>
+          <div class="pcard-row kline"><span class="pcard-tick">{{icon:check}}</span>Sprint one planned<em>Thu</em></div>
+        </div>
+        <div class="pcard-pop pop-cal"><span class="cal-chip"><b>MON</b><i>09</i></span><div><b>Kickoff with your team</b><p>9:00 · Workshop room</p></div><span class="cal-ok">{{icon:check}}</span></div>
+      </article>
+    </div>
+    <div class="partner-line" aria-hidden="true"><span class="pl-track"><i class="pl-fill"></i></span><span class="pl-dot d1"></span><span class="pl-dot d2"></span><span class="pl-dot d3"></span><span class="pl-arrow">{{icon:arrow-right}}</span></div>
+    <div class="partner-steps">
+      <article><h3>5 days</h3><strong>Proof of concept.</strong><p>Bring us the messy business problem and we build a first version your team can visualise. Your feedback shapes the rest.</p></article>
+      <article><h3>3 days</h3><strong>Quote &amp; sign-off.</strong><p>We turn what we learned into a clear scope, timeline and fixed quote. You review it, ask questions and sign off with no surprises.</p></article>
+      <article><h3>1 week</h3><strong>Project kickoff.</strong><p>Within a week of sign-off, the team is in place, access is set up and the first sprint is planned together with your people.</p></article>
+    </div>
+  </div>
+</section>
 
-<section class="services-section wrap section-space" id="services"><div class="section-kicker"><span class="section-index">02 / WHAT WE DO</span><span class="small-cross">+</span></div><div class="section-heading"><h2>Four ways in.<br>One connected outcome.</h2><p class="muted">Start where you need us.<br>We’ll connect the dots from there.</p></div><div class="service-tabs" role="tablist" aria-label="Our services"><button role="tab" id="service-zoho" aria-controls="service-panel" aria-selected="true" data-service="zoho"><span>01</span> Zoho consulting</button><button role="tab" id="service-fde" aria-controls="service-panel" aria-selected="false" data-service="fde" tabindex="-1"><span>02</span> Forward-deployed engineering</button><button role="tab" id="service-saas" aria-controls="service-panel" aria-selected="false" data-service="saas" tabindex="-1"><span>03</span> Vertical SaaS</button><button role="tab" id="service-custom" aria-controls="service-panel" aria-selected="false" data-service="custom" tabindex="-1"><span>04</span> Custom builds</button></div><div class="service-panel" id="service-panel" role="tabpanel" aria-labelledby="service-zoho"></div></section>
+<section class="think-section" id="about" data-think>
+  <div class="think-pin">
+    <div class="wrap think-inner">
+      <div class="section-kicker"><span class="section-index">01 / THE WAY WE THINK</span><span class="small-cross">+</span></div>
+      <div class="think-grid">
+        <div class="think-left">
+          <h2 data-split>Start with the business.<br>Build what makes<br><span class="muted">it work better.</span></h2>
+          <div class="sketch-frame">
+            <canvas class="sketch-canvas" role="img" aria-label="A hand-drawn sketch: scattered people, papers and tangled lines gradually come together into one organised, connected flow as you scroll."></canvas>
+            <span class="sketch-note note-mess">all the moving parts…</span>
+            <span class="sketch-note note-order">…working as one.</span>
+          </div>
+        </div>
+        <div class="think-copy">
+          <p class="think-p is-lit" data-think-step="0">Every business has its own moving parts. The tools, the people, the unwritten processes that somehow keep everything running.</p>
+          <p class="think-p" data-think-step="1">We connect those parts. We get close to your operations, find the friction, and build the right mix of systems, software, and automation to move you forward.</p>
+          <div class="think-meter" aria-hidden="true"><span>Jumbled</span><i><b></b></i><span>Organised</span></div>
+          <a class="text-link" href="/business-anatomy/">See the business behind the software {{icon:arrow-up-right}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section class="work-section section-space" id="work"><div class="wrap"><div class="section-kicker"><span class="section-index">03 / EXPERIENCE IN ACTION</span><span class="small-cross">+</span></div><div class="section-heading"><h2>Real complexity.<br>Practical solutions.</h2><a class="button light" href="/work/">All 11 case studies {{icon:arrow-up-right}}</a></div><p class="work-provenance muted">Selected experience our team brings to Imbleo. Anonymised engagements, with delivery status and context in every story.</p><div class="featured-grid">{{featured-cases}}</div></div></section>
+<section class="path-section section-space" id="services"><div class="wrap">
+  <div class="section-kicker"><span class="section-index">02 / HOW WE DELIVER</span><span class="small-cross">+</span></div>
+  <div class="section-heading"><div><h2 data-split>One path from business<br>problem to working system.</h2><p class="path-lede muted" data-reveal>Three phases, six steps, with a clear checkpoint and output at each.</p></div><a class="button dark" href="/services/" data-reveal>Explore our services {{icon:arrow-up-right}}</a></div>
+  <div class="path" data-path>
+    <svg class="path-wave" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true"><path class="path-wave-line" pathLength="1" d="M0 30 C100 0 200 60 300 30 S500 0 600 30 S800 60 900 30 S1100 0 1200 30"/></svg>
+    <span class="path-runner" aria-hidden="true"></span>
+    <div class="path-phases">{{path-phases}}</div>
+  </div>
+  <ul class="path-guides" data-reveal>{{path-guides}}</ul>
+</div></section>
 
-<section class="anatomy-section wrap section-space" id="anatomy"><div class="anatomy-feature"><div class="anatomy-copy"><span class="section-index">04 / LOOK UNDER THE SURFACE</span><span class="anatomy-pill"><span class="live-dot"></span> THE INTERACTIVE EXPERIENCE</span><h2>Meet your<br>business anatomy.</h2><p>One customer. Every team, process, and system behind their experience.</p><p class="muted">Peel back the layers of a business. Follow the customer journey. See where the connections work, and where they break.</p><a class="button dark" href="/business-anatomy/">Explore Business Anatomy {{icon:arrow-up-right}}</a><span class="anatomy-caption">Guided stories · Interactive layers · The whole picture</span></div><a class="anatomy-map" href="/business-anatomy/" aria-label="Open interactive Business Anatomy"><svg class="anatomy-wires" viewBox="0 0 600 440" aria-hidden="true"><path d="M300 220V80M300 220L110 140M300 220L490 140M300 220L110 320M300 220L490 320M300 220V380"/></svg><span class="anatomy-node node-marketing">{{icon:megaphone}}<span>Marketing<small>The first impression</small></span></span><span class="anatomy-node node-sales">{{icon:pipeline}}<span>Sales<small>The promise</small></span></span><span class="anatomy-node node-operations">{{icon:layers}}<span>Operations<small>The plan</small></span></span><span class="anatomy-core">{{icon:cube}}<strong>One customer.</strong><span>One shared story.</span></span><span class="anatomy-node node-people">{{icon:users}}<span>People<small>The capacity</small></span></span><span class="anatomy-node node-finance">{{icon:wallet}}<span>Finance<small>The commercial truth</small></span></span><span class="anatomy-node node-service">{{icon:headset}}<span>Service<small>The relationship</small></span></span><span class="map-open">Step inside {{icon:arrow-up-right}}</span></a></div></section>
+<section class="work-section section-space" id="work"><div class="wrap"><div class="section-kicker"><span class="section-index">03 / EXPERIENCE IN ACTION</span><span class="small-cross">+</span></div><div class="section-heading"><h2 data-split>Real complexity.<br>Practical solutions.</h2>{{case-menu}}</div><p class="work-provenance muted" data-reveal>Selected experience our team brings to Imbleo. Anonymised engagements, with delivery status and context in every story.</p><div class="featured-grid">{{featured-cases}}</div></div></section>
 
-<section class="process-section wrap section-space" id="approach"><div class="section-kicker"><span class="section-index">05 / HOW WE WORK</span><span class="small-cross">+</span></div><div class="section-heading"><h2>In the room.<br>On the ground.<br><span class="muted">Through to delivery.</span></h2><p class="muted">A close working partnership.<br>From the first question to the next improvement.</p></div><div class="process-grid"><article><span class="process-number">01</span><span class="process-line"></span><h3>Understand the work.</h3><p>We sit with your team, map the real process, and agree on what better looks like.</p><span class="process-output">DISCOVERY → A CLEAR PLAN</span></article><article><span class="process-number">02</span><span class="process-line"></span><h3>Build the right thing.</h3><p>Working software in reviewable increments. Your people shape the solution as it takes form.</p><span class="process-output">DESIGN → BUILD → CONNECT</span></article><article><span class="process-number">03</span><span class="process-line"></span><h3>Make it part of the business.</h3><p>Test, train, launch, and stay close. Make sure the change holds and the system keeps improving.</p><span class="process-output">LAUNCH → ADOPT → IMPROVE</span></article></div></section>
+<section class="anatomy-section wrap section-space" id="anatomy"><div class="anatomy-feature" data-reveal><div class="anatomy-copy"><span class="section-index">04 / THE INTERACTIVE EXPERIENCE</span><h2 data-split>Look under<br>the surface.</h2><p class="anatomy-line">Peel back the layers of a business. Follow the customer journey. See where the connections work and where they break.</p><a class="button dark" href="/business-anatomy/">Step inside {{icon:arrow-up-right}}</a><span class="anatomy-caption">A scroll story · One customer · Every team behind them</span></div><a class="anatomy-illus" href="/business-anatomy/" aria-label="Step inside Business Anatomy">{{anatomy-art}}<span class="map-open">Step inside {{icon:arrow-up-right}}</span></a></div></section>
 
-<section class="faq-section wrap section-space"><div class="section-kicker"><span class="section-index">06 / A FEW GOOD QUESTIONS</span><span class="small-cross">+</span></div><div class="faq-layout"><h2>Before we<br>get started.</h2><div class="faq-list"><details><summary>What does forward-deployed engineering mean? {{icon:plus}}</summary><p>An engineer works closely with your business team, learns the operation, and builds alongside the people using the software. It connects discovery, development, and adoption in one working relationship.</p></details><details><summary>Do we have to replace all our current tools? {{icon:plus}}</summary><p>We first look at what you already have. We improve, connect, or extend systems where they fit, and recommend a replacement only where it supports the agreed business outcome.</p></details><details><summary>How is vertical SaaS different from a custom build? {{icon:plus}}</summary><p>Vertical SaaS focuses on the shared workflows of a particular industry. A custom build addresses a process specific to your organisation. We assess repeatability, ownership, integrations, and support before choosing the approach.</p></details><details><summary>Can we start with one workflow? {{icon:plus}}</summary><p>Yes. A discovery engagement or focused integration sprint can give you a useful starting point. We agree on scope, acceptance criteria, dependencies, and the next step before the build begins.</p></details><details><summary>What happens after launch? {{icon:plus}}</summary><p>We plan testing, documentation, training, and handover with the build. Ongoing support and improvements can be scoped around the workflows and systems your team needs to sustain.</p></details></div></div></section>
+<section class="tools-section section-space" id="tools"><div class="wrap">
+  <div class="section-kicker"><span class="section-index">05 / THE TOOLS WE CONNECT</span><span class="small-cross">+</span></div>
+  <div class="tools-grid">
+    <div class="tools-copy">
+      <h2 data-split>Your tools.<br><span class="muted">Working as one.</span></h2>
+      <p class="tools-lede" data-reveal>Most businesses already own good software. We learn how you use it, connect what should talk, and fill the gaps, so every app plays its part in one system.</p>
+      <ul class="tool-list" data-reveal>{{tool-list}}</ul>
+      <a class="text-link" href="/services/#platforms" data-reveal>See the platforms we work with {{icon:arrow-up-right}}</a>
+    </div>
+    <div class="cube-stage" data-cube>
+      <div class="cube-scene"><div class="cube" aria-hidden="true"></div></div>
+      <span class="cube-hint">{{icon:cursor}} Drag the cube</span>
+      <svg class="venn" viewBox="0 0 420 200" role="img" aria-label="Business and Technology overlap. Imbleo works in the overlap."><defs><clipPath id="venn-clip"><circle cx="150" cy="150" r="112"/></clipPath></defs><circle cx="270" cy="150" r="112" class="venn-lens" clip-path="url(#venn-clip)"/><circle class="venn-ring" cx="150" cy="150" r="112"/><circle class="venn-ring" cx="270" cy="150" r="112"/><text x="88" y="168" text-anchor="middle">Business</text><text x="210" y="168" text-anchor="middle" class="venn-me">imbleo</text><text x="332" y="168" text-anchor="middle">Technology</text></svg>
+    </div>
+  </div>
+</div></section>
 
-<section class="closing-section wrap"><div class="closing-grid"><span class="closing-mark">{{icon:cube}}</span><div><p class="eyebrow">YOUR NEXT CHAPTER STARTS WITH A CONVERSATION.</p><h2>Bring us the messy part.</h2><p class="muted">The disconnected tools. The spreadsheet workaround.<br>The idea you haven’t quite figured out. Let’s make it work.</p><button class="button dark" data-contact>Let’s talk about your business {{icon:arrow-up-right}}</button></div><span class="closing-note">Business first.<br>Better together.</span></div></section>
+<section class="faq-section wrap section-space"><div class="section-kicker"><span class="section-index">06 / A FEW GOOD QUESTIONS</span><span class="small-cross">+</span></div><div class="faq-layout"><h2 data-split>Bring us<br> the messy part.</h2><div class="faq-list" data-reveal><details><summary>What does forward-deployed engineering mean? {{icon:plus}}</summary><p>An engineer works closely with your business team, learns the operation, and builds alongside the people using the software. It connects discovery, development, and adoption in one working relationship.</p></details><details><summary>Do we have to replace all our current tools? {{icon:plus}}</summary><p>We first look at what you already have. We improve, connect, or extend systems where they fit, and recommend a replacement only where it supports the agreed business outcome.</p></details><details><summary>How is vertical SaaS different from a custom build? {{icon:plus}}</summary><p>Vertical SaaS focuses on the shared workflows of a particular industry. A custom build addresses a process specific to your organisation. We assess repeatability, ownership, integrations, and support before choosing the approach.</p></details><details><summary>Can we start with one workflow? {{icon:plus}}</summary><p>Yes. A five-day proof of concept or a focused integration sprint gives you a useful starting point. We agree on scope, acceptance criteria, dependencies, and the next step before the build begins.</p></details><details><summary>What happens after launch? {{icon:plus}}</summary><p>We plan testing, documentation, training, and handover with the build. Ongoing support and improvements can be scoped around the workflows and systems your team needs to sustain.</p></details></div></div></section>
+
+<section class="closing-section wrap"><div class="closing-grid" data-reveal><span class="closing-mark">{{icon:cube}}</span><div><p class="eyebrow">YOUR NEXT CHAPTER STARTS WITH A CONVERSATION.</p><h2>Let’s make it work.</h2><p class="muted">The disconnected tools. The spreadsheet workaround.<br> The idea you haven’t quite figured out. Tell us about it.</p><button class="button dark" data-contact>Let’s talk about your business {{icon:arrow-up-right}}</button></div><span class="closing-note">Business first.<br>Better together.</span></div></section>

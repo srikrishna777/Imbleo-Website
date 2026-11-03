@@ -13,7 +13,7 @@
 export const cases = [
   // 1. Published Zoho MCP story
   {
-    slug: 'zoho-mcp-ai-operations',
+    slug: 'ai-mcp-operations',
     title: 'AI connected to the operating system of a business',
     short: 'AI inside the CRM',
     oneLiner:
@@ -1166,7 +1166,7 @@ export const cases = [
 
   // 9. SAP core, Zoho edge (solution pattern)
   {
-    slug: 'sap-core-zoho-edge',
+    slug: 'sap-core-connected-edge',
     title: 'Keep SAP at the core, extend it at the edge',
     short: 'SAP core, Zoho edge',
     oneLiner:

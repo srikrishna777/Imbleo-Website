@@ -7,23 +7,20 @@ const files=walk(root),pages=files.filter(p=>p.endsWith('.html')),errors=[];
 const ids=s=>[...s.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);
 const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 for(const path of pages){
- const html=readFileSync(path,'utf8'),pageIds=ids(html),isAnatomy=path.includes('/business-anatomy/');
- if(!isAnatomy){
+ const html=readFileSync(path,'utf8'),pageIds=ids(html);
+ {
   if(html.includes('undefined')||html.includes('{{'))errors.push(`${path}: unresolved content`);
   const duplicates=pageIds.filter((id,i)=>pageIds.indexOf(id)!==i);
   if(duplicates.length)errors.push(`${path}: duplicate IDs ${duplicates}`);
   for(const ref of html.matchAll(/aria-(?:controls|labelledby)="([^"]+)"/g))for(const id of ref[1].split(/\s+/))if(!pageIds.includes(id))errors.push(`${path}: missing ARIA target ${id}`);
  }
- // The original Anatomy export mounts its own React tree. Its fallback
- // markup's generated Radix IDs are replaced at runtime, so audit local
- // asset/navigation targets here and leave its runtime ARIA state to browser QA.
  for(const link of html.matchAll(/<(?:a|link|script)\b[^>]*?(?:href|src)="([^"]+)"/g)){
   if(/^[a-z][a-z\d+.-]*:|^\/\//i.test(link[1]))continue;
   const [url,fragment]=link[1].split('#');const pathname=url.split('?')[0];
   let target=pathname?(pathname.startsWith('/')?join(root,decodeURIComponent(pathname)):resolve(dirname(path),decodeURIComponent(pathname))):path;
   if(existsSync(target)&&statSync(target).isDirectory())target=join(target,'index.html');
   if(!existsSync(target)){errors.push(`${path}: missing ${link[1]}`);continue;}
-  if(fragment&&extname(target)==='.html'&&!target.includes('/business-anatomy/')&&!ids(readFileSync(target,'utf8')).includes(fragment))errors.push(`${path}: missing fragment ${link[1]}`);
+  if(fragment&&extname(target)==='.html'&&!ids(readFileSync(target,'utf8')).includes(fragment))errors.push(`${path}: missing fragment ${link[1]}`);
  }
 }
 for(const c of cases){
@@ -36,11 +33,15 @@ for(const c of cases){
 // Verify the supplied interactive export's entire relative module closure.
 for(const p of files.filter(p=>p.endsWith('.js'))){
  const js=readFileSync(p,'utf8');
- for(const match of js.matchAll(/(?:from\s*|import\s*)["'](\.{1,2}\/[^"']+)["']/g)){
+ for(const match of js.matchAll(/(?:from\s*|import\s*\(?\s*)["'](\.{1,2}\/[^"']+)["']/g)){
   const target=resolve(dirname(p),match[1].split('?')[0]);
   if(!existsSync(target))errors.push(`${p}: missing imported module ${match[1]}`);
  }
 }
+// Client request: the homepage must not mention Zoho anywhere (copy, links or metadata).
+const homeHtml=readFileSync(join(root,'index.html'),'utf8');
+if(/zoho/i.test(homeHtml))errors.push('index.html: the homepage mentions Zoho');
+for(const required of ['services/index.html','business-anatomy/index.html'])if(!existsSync(join(root,required)))errors.push(`Missing page: ${required}`);
 if(errors.length){console.error(errors.join('\n'));process.exit(1);}
-console.log(`PASS: ${pages.length} HTML pages, ${cases.length} detailed case studies, local routes, asset/module links, fragments, generated-page ARIA references, and original metric qualifiers.`);
+console.log(`PASS: ${pages.length} HTML pages, ${cases.length} detailed case studies, local routes, asset/module links (including dynamic imports), fragments, ARIA references, original metric qualifiers, and a Zoho-free homepage.`);
 console.log('Browser layout and runtime interaction QA remain separate checks.');
