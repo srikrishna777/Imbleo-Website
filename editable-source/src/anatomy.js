@@ -135,7 +135,6 @@ export function anatomyArt({mode = 'story', prefix = 'an'} = {}) {
     <path d="M0 200 Q40 194 80 200 T160 200 T240 200 T320 200 T400 200 T480 200 T560 200 T640 200 T720 200 T800 200 T880 200 T960 200 V216 H0Z" fill="${C.green}"/>
     
     <rect y="214" width="900" height="290" fill="${C.soil}"/>
-    <rect y="214" width="900" height="290" fill="url(#${P}-dots)" opacity=".55"/>
     <text x="22" y="230" class="anat-layer under">UNDER THE SURFACE · THE PEOPLE AND THE HAND-OFFS</text>
     <g class="threads">${threads.map(t => `<g class="thread th-${t.id}${t.gap ? ' has-gap' : ''}"><path class="thread-line" d="${t.d}"/>${t.gap ? `<g class="gap-mark" transform="translate(${t.gx} ${t.gy})"><g class="gap-in"><circle r="10"/><path d="M-4 -4 4 4M4 -4-4 4"/><text y="-15" text-anchor="middle">${t.gap}</text></g></g>` : ''}<circle class="pulse" r="4.5"><animateMotion dur="${2.2 + (t.id.charCodeAt(1) % 3) * .4}s" repeatCount="indefinite"><mpath href="#${P}-${t.id}"/></animateMotion></circle></g>`).join('')}</g>
     <g class="chambers">${depts.map((d, i) => chamber(d, i)).join('')}</g>
@@ -149,7 +148,6 @@ export function anatomyArt({mode = 'story', prefix = 'an'} = {}) {
     </g>
     <g class="cover cover-people"><rect y="216" width="900" height="288" fill="#e4e8f8"/><rect y="216" width="900" height="288" fill="url(#${P}-dots)"/><text x="450" y="352" text-anchor="middle" class="cover-text">What happens under here?</text><path d="M434 372l16 14 16-14" fill="none" stroke="#9aa1cf" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g>
     <rect y="504" width="900" height="136" fill="${C.navy}"/>
-    <rect y="504" width="900" height="136" fill="url(#${P}-dots-dark)"/>
     <text x="22" y="528" class="anat-layer tech">THE TECHNOLOGY UNDERNEATH</text>
     <g class="tools">${tools.map(([k, t], i) => {const x = 30 + i * 143; return `<g class="tool tool-${k}" style="--i:${i}"><path class="tool-plug" d="M${x + 60} 546V510" /><rect x="${x}" y="546" width="120" height="66" rx="14"/><path d="${icons[k]}" transform="translate(${x + 14} ${560}) scale(1.05)" class="tool-icon"/><text x="${x + 44}" y="584">${t}</text></g>`;}).join('')}</g>
     <g class="cover cover-tech"><rect y="505" width="900" height="135" fill="#141b5e"/><text x="450" y="580" text-anchor="middle" class="cover-text dark">…and under here?</text></g>

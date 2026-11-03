@@ -94,7 +94,8 @@ function quadPoint(a, c, b, t) { const u = 1 - t; return [u * u * a[0] + 2 * u *
 export function init(section) {
   const canvas = section.querySelector('.sketch-canvas');
   if (!canvas || !canvas.getContext) return;
-  const ctx = canvas.getContext('2d');
+  const mainCtx = canvas.getContext('2d');
+  let ctx = mainCtx;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pin = section.querySelector('.think-pin');
   const steps = [...section.querySelectorAll('[data-think-step]')];
@@ -109,15 +110,16 @@ export function init(section) {
       headFill: P(wobble(0, -92, 12.5, 11 + i * 7)),
       torso: P(BODY.torso), legs: P(BODY.legs),
       strokes: P([BODY.feet, BODY.neck, BODY.collar, BODY.face, HAIR[c.hair], pose.arms].join(' ')),
-      hands: pose.hands.map(([x, y]) => P(wobble(x, y, 3.2, 90 + i * 13 + x, 1))),
+      hands: P(pose.hands.map(([x, y]) => wobble(x, y, 3.2, 90 + i * 13 + x, 1)).join(' ')),
       prop: pose.props ? P(pose.props) : null,
       propFill: pose.propFill ? P(pose.propFill) : null,
       glasses: c.glasses ? P(wobble(-5, -93, 4.2, 300 + i, 1) + ' ' + wobble(5, -93, 4.2, 310 + i, 1) + ' M-1 -93 L1 -93') : null,
       delay: [0.02, 0.1, 0.16, 0.22, 0.12, 0.27][i]
     };
   });
+  cast.forEach(c => { const body = new Path2D(); [c.legs, c.torso, c.head, c.strokes].forEach(q => body.addPath(q)); c.body = body; });
   const props = PROPS.map((p, i) => ({...p, i, fill: P(PROP_PATHS[p.k].fill), line: P(PROP_PATHS[p.k].line), tint: PROP_PATHS[p.k].tint, delay: 0.08 + i * 0.035}));
-  const doc = {fill: P('M-62 -34 L62 -34 L62 34 L-62 34 Z'), line: P('M-62 -34 L62 -34 L62 34 L-62 34 Z M-62 -21 L62 -21 M-54 -28 L-30 -28 M-48 -9 L4 -9 M-48 4 L-6 4 M-48 17 L0 17 M18 22 L18 6 M28 22 L28 -2 M38 22 L38 10 M48 22 L48 -10 M14 24 L54 24'), checks: P('M-57 -10 l3 3 l5 -6 M-57 3 l3 3 l5 -6 M-57 16 l3 3 l5 -6')};
+  const doc = {fill: P('M-62 -34 L62 -34 L62 34 L-62 34 Z'), line: P('M-62 -34 L62 -34 L62 34 L-62 34 Z M-62 -21 L62 -21 M-54 -28 L-30 -28 M-48 -9 L4 -9 M-48 4 L-6 4 M-48 17 L0 17 M18 22 L18 6 M28 22 L28 -2 M38 22 L38 10 M48 22 L48 -10 M14 24 L54 24'), checks: P('M-57 -10 l3 3 l5 -6 M-57 3 l3 3 l5 -6 M-57 16 l3 3 l5 -6'), band: P('M-62 -34 L62 -34 L62 -21 L-62 -21 Z')};
   const R0 = rng(4242);
   const links = LINKS.map((L, i) => {
     const order = Array.from({length: NPTS}, (_, k) => quadPoint(L.a, L.c, L.b, k / (NPTS - 1)));
@@ -128,9 +130,9 @@ export function init(section) {
 
   let dpr = 1, scale = 1, ox = 0, oy = 0, progress = reduced ? 1 : 0, shown = reduced ? 1 : 0, visible = false, raf = 0, t0 = performance.now();
   function resize() {
-    const r = canvas.getBoundingClientRect(); dpr = Math.min(devicePixelRatio || 1, 2);
+    const r = canvas.getBoundingClientRect(); dpr = Math.min(devicePixelRatio || 1, 1.5, Math.sqrt(720000 / Math.max(1, r.width * r.height)));
     canvas.width = Math.max(1, Math.round(r.width * dpr)); canvas.height = Math.max(1, Math.round(r.height * dpr));
-    scale = Math.min(r.width / W, r.height / H); ox = (r.width - W * scale) / 2; oy = (r.height - H * scale) / 2; draw(performance.now());
+    scale = Math.min(r.width / W, r.height / H); ox = (r.width - W * scale) / 2; oy = (r.height - H * scale) / 2; framesFor = -1; draw(performance.now());
   }
 
   function stroke(path, R, jit, w = 1.45, alpha = 0.88, color = INK) {
@@ -140,19 +142,30 @@ export function init(section) {
       ctx.globalAlpha = alpha * (k ? 0.5 : 1); ctx.lineWidth = k ? w * 0.75 : w; ctx.stroke(path); ctx.restore();
     }
   }
+  // Cross-hatching comes from small pre-drawn stripe tiles, so a frame is a few fills
+  // rather than hundreds of clipped strokes.
+  const patterns = new Map(), K = 3;
+  function stripes(color, gap) {
+    const key = color + gap; if (patterns.has(key)) return patterns.get(key);
+    const s = Math.round(gap * K), c = document.createElement('canvas'); c.width = c.height = s;
+    const g = c.getContext('2d'); g.strokeStyle = color; g.lineWidth = 1.05 * K; g.lineCap = 'square'; g.beginPath();
+    for (const o of [-s, 0, s]) { g.moveTo(0, o); g.lineTo(s, o + s); }
+    g.stroke();
+    const pattern = ctx.createPattern(c, 'repeat'); if (pattern.setTransform) pattern.setTransform(new DOMMatrix().scale(1 / K));
+    patterns.set(key, pattern); return pattern;
+  }
   function hatch(path, color, alpha, R, jit, gap = 4.2) {
-    ctx.save(); ctx.clip(path); ctx.strokeStyle = color; ctx.globalAlpha = alpha; ctx.lineWidth = 1.05; ctx.beginPath();
-    for (let x = -170; x < 60; x += gap) { ctx.moveTo(x + (R() - 0.5) * jit, -125); ctx.lineTo(x + 125 + (R() - 0.5) * jit, 5); }
-    ctx.stroke(); ctx.restore();
+    ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = stripes(color, gap); ctx.fill(path); ctx.restore();
   }
   function fillPaper(path) { ctx.fillStyle = PAPER; ctx.globalAlpha = 1; ctx.fill(path); }
+  const fonts = {};
   function hand(text, x, y, rot, alpha, color = INK, size = 17) {
-    if (alpha <= 0.01) return; ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.globalAlpha = alpha; ctx.fillStyle = color;
-    ctx.font = HAND.replace('17px', size + 'px'); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, 0); ctx.restore();
+    if (alpha <= 0.01) return; ctx.save(); ctx.translate(x, y); if (rot) ctx.rotate(rot); ctx.globalAlpha = alpha; ctx.fillStyle = color;
+    ctx.font = fonts[size] || (fonts[size] = HAND.replace('17px', size + 'px')); ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, 0); ctx.restore();
   }
   function smoothLine(pts) { ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length - 1; i++) { const mx = (pts[i][0] + pts[i + 1][0]) / 2, my = (pts[i][1] + pts[i + 1][1]) / 2; ctx.quadraticCurveTo(pts[i][0], pts[i][1], mx, my); } const l = pts[pts.length - 1]; ctx.lineTo(l[0], l[1]); }
 
-  function draw(now) {
+  function draw(now, withDots = true) {
     const time = (now - t0) / 1000;
     const p = shown, m = 1 - p;
     const boil = reduced ? 0 : Math.floor(time * 8);
@@ -176,7 +189,7 @@ export function init(section) {
     const dp = clamp((p - 0.55) / 0.35);
     if (dp > 0) {
       const R = rng(900 + boil); ctx.save(); ctx.translate(300, 240); ctx.scale(0.7 + 0.22 * ease(dp), 0.7 + 0.22 * ease(dp)); ctx.rotate((1 - dp) * 0.2);
-      ctx.globalAlpha = dp; fillPaper(doc.fill); hatch(new Path2D('M-62 -34 L62 -34 L62 -21 L-62 -21 Z'), BLUE, 0.55 * dp, R, 0.8, 3);
+      ctx.globalAlpha = dp; fillPaper(doc.fill); hatch(doc.band, BLUE, 0.55 * dp, R, 0.8, 3);
       stroke(doc.line, R, jit, 1.4, 0.9 * dp); stroke(doc.checks, R, jit, 1.8, dp, GREEN_D);
       ctx.restore();
       hand('← one shared picture', 432, 238, -0.04, clamp((p - 0.8) / 0.15), GREEN_D, 18);
@@ -197,7 +210,7 @@ export function init(section) {
         hand(L.label, L.lx, L.ly, L.rot || 0, a * 0.95, color, 15);
       }
       // Work flowing round the loop.
-      if (p > 0.9 && !reduced) {
+      if (withDots && p > 0.9 && !reduced) {
         const a = clamp((p - 0.9) / 0.08); const k = Math.floor(((time * 0.42 + i / 6) % 1) * (NPTS - 1)); const d = pts[k];
         ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = GREEN; ctx.beginPath(); ctx.arc(d[0], d[1], 3.6, 0, 7); ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.9; ctx.stroke(); ctx.restore();
       }
@@ -227,8 +240,8 @@ export function init(section) {
       fillPaper(c.legs); fillPaper(c.torso); fillPaper(c.headFill);
       hatch(c.torso, pp > 0.5 ? c.shirt : GRAPHITE, 0.25 + 0.4 * pp, R, 1.2);
       hatch(c.legs, INK, 0.18 + 0.1 * pp, R, 1, 5.5);
-      stroke(c.legs, R, jit); stroke(c.torso, R, jit); stroke(c.head, R, jit, 1.5); stroke(c.strokes, R, jit);
-      c.hands.forEach(h => { fillPaper(h); stroke(h, R, jit, 1.2); });
+      stroke(c.body, R, jit);
+      fillPaper(c.hands); stroke(c.hands, R, jit, 1.2);
       if (c.propFill) { fillPaper(c.propFill); hatch(c.propFill, pp > 0.5 ? c.shirt : GRAPHITE, 0.2 + 0.25 * pp, R, 1, 3.2); }
       if (c.prop) stroke(c.prop, R, jit, 1.35);
       if (c.glasses) stroke(c.glasses, R, jit, 1.1);
@@ -243,29 +256,66 @@ export function init(section) {
     ctx.globalAlpha = 1;
   }
 
+  let pinned = false;
+  const checkPinned = () => { pinned = !!pin && getComputedStyle(pin).position === 'sticky'; };
+  // Moving dots on the finished loop, drawn over a cached idle frame.
+  function drawDots(now) {
+    const time = (now - t0) / 1000, a = clamp((shown - 0.9) / 0.08);
+    ctx.setTransform(dpr * scale, 0, 0, dpr * scale, dpr * ox, dpr * oy);
+    links.forEach((L, i) => {
+      const k = Math.floor(((time * 0.42 + i / 6) % 1) * (NPTS - 1)), d = L.order[k];
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = GREEN; ctx.beginPath(); ctx.arc(d[0], d[1], 3.6, 0, 7); ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 0.9; ctx.stroke(); ctx.restore();
+    });
+  }
+  // Idle: replay three pre-rendered "boil" frames instead of redrawing the whole sketch.
+  const frames = [null, null, null]; let framesFor = -1;
+  function blitIdle(now) {
+    if (framesFor !== shown) { frames.fill(null); framesFor = shown; }
+    const f = Math.floor((now - t0) / 120) % 3;
+    if (!frames[f]) {
+      const c = document.createElement('canvas'); c.width = canvas.width; c.height = canvas.height;
+      ctx = c.getContext('2d'); draw(t0 + 1000 + f * 370, false); ctx = mainCtx; frames[f] = c;
+    }
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.drawImage(frames[f], 0, 0);
+    if (shown > 0.9 && !reduced) drawDots(now);
+  }
   function measure() {
     const vh = innerHeight; let p;
-    const pinned = pin && getComputedStyle(pin).position === 'sticky';
     if (pinned) { const r = section.getBoundingClientRect(); const span = Math.max(1, r.height - vh); p = clamp((-r.top / span - 0.06) / 0.74); }
     else { const r = canvas.getBoundingClientRect(); p = clamp((vh * 0.92 - r.top) / (vh * 0.8)); }
     return p;
   }
+  let lastVar = -1, ticking = false;
   function update() {
+    ticking = false;
     progress = reduced ? 1 : measure();
-    section.style.setProperty('--think', progress.toFixed(3));
-    steps.forEach((s, i) => s.classList.toggle('is-lit', i === 0 ? progress < 0.55 : progress >= 0.45));
+    if (Math.abs(progress - lastVar) > 0.004 || progress === 0 || progress === 1) {
+      lastVar = progress; section.style.setProperty('--think', progress.toFixed(3));
+      steps.forEach((s, i) => s.classList.toggle('is-lit', i === 0 ? progress < 0.55 : progress >= 0.45));
+    }
+    if (visible && !raf) raf = requestAnimationFrame(loop);
   }
+  // Full frame rate only while the drawing is catching up with the scroll; otherwise
+  // the pencil "boil" ticks at about 10 fps, like hand-drawn animation.
+  let lastDraw = 0;
   function loop(now) {
     raf = 0;
-    shown += (progress - shown) * (reduced ? 1 : 0.14);
-    if (Math.abs(progress - shown) < 0.0005) shown = progress;
-    draw(now);
-    if (visible && !reduced) raf = requestAnimationFrame(loop);
+    if (!visible || reduced) return;
+    // Time-based easing: catches up in about half a second whatever the frame rate.
+    const dt = Math.min(100, now - (loop.prev || now)); loop.prev = now;
+    const moving = Math.abs(progress - shown) > 0.002;
+    if (moving) { shown += (progress - shown) * (1 - Math.exp(-dt / 110)); if (Math.abs(progress - shown) <= 0.002) shown = progress; }
+    else if (shown !== progress) shown = progress;
+    if (moving) { if (now - lastDraw > 32) { draw(now); lastDraw = now; } }
+    else if (now - lastDraw > 110) { blitIdle(now); lastDraw = now; }
+    raf = requestAnimationFrame(loop);
   }
-  const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !raf) raf = requestAnimationFrame(loop); }, {rootMargin: '80px'});
+  const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !raf) raf = requestAnimationFrame(loop); });
   io.observe(canvas);
-  addEventListener('scroll', update, {passive: true});
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, {passive: true});
+  addEventListener('resize', checkPinned);
   new ResizeObserver(resize).observe(canvas);
-  update(); resize();
-  if (document.fonts) document.fonts.load(HAND).then(() => draw(performance.now())).catch(() => {});
+  checkPinned(); update(); resize();
+  if (reduced) { shown = 1; draw(performance.now()); }
+  if (document.fonts) document.fonts.load(HAND).then(() => { framesFor = -1; draw(performance.now()); }).catch(() => {});
 }

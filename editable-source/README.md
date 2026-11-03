@@ -4,6 +4,8 @@ A static company website for business systems, forward-deployed engineering, ver
 
 Brand palette: Dark blue `#1e2c9b`, Vibrant green `#47b824`, Pure white `#ffffff` (tokens at the top of `public/assets/site.css`).
 
+Logo: the original artwork is `public/assets/logo.jpeg` (also used as the social-sharing image). The header, footer and favicon use an SVG rebuild of the same mark and wordmark (`brandMark` in `scripts/build.mjs`) so it stays sharp at every size and can turn white on the blue footer.
+
 ## Run and edit
 
 Requires Node.js and Python 3. No package installation is needed.
@@ -30,10 +32,14 @@ Open http://localhost:4173. Deploy the contents of `dist/` to any static host. D
 
 All motion respects `prefers-reduced-motion`: the page then shows the finished, organised state without animation.
 
+Performance: looping animations use only `transform` and `opacity`, pause when off screen (including the SVG's own motion), and scroll handlers are throttled to one update per frame. The sketch canvas redraws at full rate only while you scroll and replays three cached frames when idle; the cube restyles its tiles only while they assemble. Homepage sections below the fold use `content-visibility: auto` with measured height estimates.
+
 ## Homepage rules
 
 - No mention of Zoho anywhere on the homepage. `npm run check` fails if the word appears in `dist/index.html`. Platform names live on `/services/` and in the case studies.
-- Logos in the strip under the hero are placeholders. Replace the `logoPlaceholders` markup in `scripts/build.mjs` when real logos are approved.
+- Logos in the strip under the hero are placeholders that blink out and pop back in. Replace the `logoWall` markup in `scripts/build.mjs` when real client logos are approved (use only logos you have permission to show).
+- The blue "Let's make it work" card is the footer on every page, so pages do not repeat a separate closing call to action.
+- Case studies do not show delivery-status labels or tool tags on cards, in the dropdown or on the case pages. Each case page still states in plain words whether the work was delivered, partly delivered, a design or a prototype.
 
 The enquiry flow prepares an email draft and offers a downloadable text brief. It does not claim to send or store enquiries. It uses `adiedubus@gmail.com`, the contact supplied in the portfolio source. Change the address in both `scripts/build.mjs` and `public/assets/app.js` when the company's final inbox is ready.
 

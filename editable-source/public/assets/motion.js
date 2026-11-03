@@ -35,13 +35,19 @@ function partner(board){
 function pathRunner(section){
   const path=$('.path-wave-line',section),runner=$('.path-runner',section),wave=$('.path-wave',section);
   if(!path||!runner||!wave)return;
-  const len=path.getTotalLength();let ticking=false;
+  const steps=$$('.step',section),len=path.getTotalLength();let ticking=false,box={w:0,h:0,top:0},last=-1;
+  const measure=()=>{box={w:wave.clientWidth,h:wave.clientHeight,top:wave.offsetTop}};
+  // One layout read per frame, then compositor-only writes (transform, dash offset).
   const update=()=>{ticking=false;const r=section.getBoundingClientRect(),vh=innerHeight;
+    if(r.bottom<-200||r.top>vh+200)return;
     const p=Math.min(1,Math.max(0,(vh*0.85-r.top)/(r.height*0.9)));
-    const pt=path.getPointAtLength(len*p);runner.style.left=(pt.x/1200*100)+'%';runner.style.top=(wave.offsetTop+pt.y/60*wave.clientHeight)+'px';
-    section.style.setProperty('--path',p.toFixed(3));
-    $$('.step',section).forEach((s,i)=>s.classList.toggle('lit',p>=(i+0.4)/6));};
-  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});addEventListener('resize',update);update();
+    if(Math.abs(p-last)<0.001)return;last=p;
+    const pt=path.getPointAtLength(len*p);
+    runner.style.transform='translate3d('+(pt.x/1200*box.w).toFixed(1)+'px,'+(box.top+pt.y/60*box.h).toFixed(1)+'px,0)';
+    path.style.strokeDashoffset=(1-p).toFixed(4);
+    steps.forEach((s,i)=>s.classList.toggle('lit',p>=(i+0.4)/6));};
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',()=>{measure();last=-1;update()});measure();update();
 }
 
 export function init(){
@@ -54,8 +60,9 @@ export function init(){
     $$('[data-count]',el).forEach(c=>{if(!el.matches('[data-partner]'))countUp(c)});
   }),{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
   revealTargets.forEach(el=>once.observe(el));
-  // Looping art only animates while it is on screen.
-  const live=new IntersectionObserver(entries=>entries.forEach(e=>e.target.classList.toggle('playing',e.isIntersecting)),{rootMargin:'60px'});
-  $$('.case-art,.anat,.partner-board,.logo-marquee,.workspace-stage').forEach(el=>live.observe(el));
+  // Looping 2D animations (CSS and the SVG's own SMIL motion) only run on screen.
+  const live=new IntersectionObserver(entries=>entries.forEach(e=>{const el=e.target;el.classList.toggle('playing',e.isIntersecting);
+    if(el.matches('svg.anat')&&el.pauseAnimations)e.isIntersecting?el.unpauseAnimations():el.pauseAnimations();}),{rootMargin:'60px'});
+  $$('.case-art,.anat,.partner-board,.logo-wall,.workspace-stage').forEach(el=>live.observe(el));
   $$('[data-path]').forEach(el=>pathRunner(el.closest('section')));
 }
