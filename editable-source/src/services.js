@@ -40,13 +40,10 @@ export const servicesPage = {
     lede: 'Most engagements combine several of these. We can start with discovery or an audit, own the design and build, deliver one focused integration, or bring AI into a specific workflow.',
     jump: [
       {id: 'explorer', label: 'What we do'},
-      {id: 'ways', label: 'Four ways in'},
       {id: 'deliver', label: 'How we deliver'},
       {id: 'ai', label: 'Practical AI'},
       {id: 'migration', label: 'Data migration'},
-      {id: 'platforms', label: 'Platforms'},
-      {id: 'engage', label: 'Ways to engage'},
-      {id: 'faq', label: 'Questions'}
+      {id: 'platforms', label: 'Platforms'}
     ]
   },
   explorer: {
@@ -58,7 +55,7 @@ export const servicesPage = {
       {short: 'Integration', icon: 'link', title: 'Integration & automation', line: 'Enter it once, send it to the right place, never fail silently.', bullets: ['Native connectors between CRM, finance, projects and service', 'Integration platforms chosen by fit, not habit', 'API and webhook connections with least-privilege access', 'Validation, deduplication, alerts and retries', 'A map that explains what runs, when, and what happens if it fails'], deliverables: ['System-to-system map', 'Field mapping', 'Access approach', 'Error handling', 'Test evidence', 'Monitoring plan']},
       {short: 'Data migration', icon: 'download', title: 'Data migration & quality', line: 'A rehearsed, reconciled move. Never a one-off import.', bullets: ['Source inventory, field mapping and data ownership', 'Cleansing, deduplication and standardisation', 'Trial loads, reconciliation and cutover planning', 'Post-migration checks and a documented exception list'], deliverables: ['Source inventory', 'Mapping workbook', 'Cleansing rules', 'Trial-load reconciliation', 'Cutover plan', 'Exception list']},
       {short: 'Reporting', icon: 'chart', title: 'Analytics & reporting', line: 'Reports that answer a question someone actually asks.', bullets: ['Operational reports and management dashboards', 'KPI definitions, scorecards and workload views', 'Data combined across sources where feasible', 'Scheduled reports instead of weekly spreadsheet assembly'], deliverables: ['KPI definitions', 'Dashboards', 'Scheduled reports', 'Data source map']},
-      {short: 'AI in operations', icon: 'sparkles', title: 'AI-enabled operations', line: 'AI inside a real workflow, with context and controls.', bullets: ['Assistants and agents where they genuinely fit', 'Approved connections to business data, including MCP', 'Research, classification, summaries and drafting', 'Meeting notes to tasks, plain-language questions, ticket triage', 'Evaluation, approvals, logging and fallbacks'], deliverables: ['Use-case brief', 'Task allocation', 'Approved data sources', 'Evaluation results', 'Guardrails', 'Pilot plan']},
+      {short: 'AI in operations', icon: 'sparkles', title: 'AI in operations', line: 'AI inside a real workflow, with context and controls.', bullets: ['Assistants and agents where they genuinely fit', 'Approved connections to business data, including MCP', 'Research, classification, summaries and drafting', 'Meeting notes to tasks, plain-language questions, ticket triage', 'Evaluation, approvals, logging and fallbacks'], deliverables: ['Use-case brief', 'Task allocation', 'Approved data sources', 'Evaluation results', 'Guardrails', 'Pilot plan']},
       {short: 'Custom apps', icon: 'code', title: 'Custom apps & prototypes', line: 'The lightest extension that does the job.', bullets: ['Custom functions for rules, checks and documents', 'Low-code apps for inspections, job sheets and approvals', 'Rapid prototypes to test an idea with real users first', 'Full custom builds when the right tool does not exist yet'], deliverables: ['Requirements', 'Working prototype', 'App or function', 'Build notes', 'Handover']},
       {short: 'Adoption', icon: 'users', title: 'Adoption & improvement', line: 'Live is not finished. People need to use it well.', bullets: ['Role-based training, short walkthroughs and quick guides', 'User acceptance testing and go-live checks', 'Hypercare, health checks and an improvement backlog', 'Adoption and data-quality reviews'], deliverables: ['UAT checklist', 'Training material', 'Admin guide', 'Runbook', 'Ownership map', 'Improvement backlog']}
     ],
@@ -110,16 +107,19 @@ export const servicesPage = {
     title: 'Your stack, connected.',
     lede: 'The tools are the means, not the product. The stack follows the requirement, and we design around what already works.',
     groups: [
-      {name: 'Business suites & CRM', icon: 'pipeline', apps: ['Zoho One', 'Zoho CRM', 'Salesforce', 'HubSpot', 'Microsoft Dynamics 365', 'Pipedrive']},
-      {name: 'Finance & payments', icon: 'wallet', apps: ['Xero', 'QuickBooks', 'MYOB', 'Zoho Books', 'Stripe']},
-      {name: 'Integration & automation', icon: 'link', apps: ['Zoho Flow', 'Make', 'Zapier', 'n8n', 'Power Automate', 'REST APIs & webhooks']},
-      {name: 'Analytics & reporting', icon: 'chart', apps: ['Power BI', 'Zoho Analytics', 'Looker Studio', 'Tableau', 'Google Sheets']},
-      {name: 'Service & projects', icon: 'headset', apps: ['Zoho Desk', 'Zendesk', 'Freshdesk', 'Jira', 'Asana', 'monday.com']},
-      {name: 'Work & collaboration', icon: 'users', apps: ['Microsoft 365', 'Google Workspace', 'Slack', 'Microsoft Teams', 'Notion']},
-      {name: 'Low-code & custom', icon: 'code', apps: ['Zoho Creator', 'Zoho Catalyst', 'Web apps & portals', 'Internal tools']},
-      {name: 'AI', icon: 'sparkles', apps: ['Claude', 'ChatGPT', 'Zia & Zia Agents', 'MCP connections']}
-    ],
-    note: 'Platform names identify ecosystems and integration capabilities, not formal partnerships.'
+      {name: 'Business suites & CRM', icon: 'pipeline', apps: ['Zoho One', 'Zoho CRM', 'Salesforce', 'HubSpot', 'Microsoft Dynamics 365', 'Pipedrive', 'Freshsales', 'monday CRM', 'Odoo']},
+      {name: 'Finance & payments', icon: 'wallet', apps: ['Xero', 'QuickBooks', 'MYOB', 'Zoho Books', 'NetSuite', 'Sage', 'Stripe', 'PayPal', 'GoCardless']},
+      {name: 'Integration & automation', icon: 'link', apps: ['Zoho Flow', 'Make', 'Zapier', 'n8n', 'Power Automate', 'Workato', 'REST APIs & webhooks']},
+      {name: 'Analytics & reporting', icon: 'chart', apps: ['Power BI', 'Zoho Analytics', 'Looker Studio', 'Tableau', 'Metabase', 'Google Sheets', 'Excel']},
+      {name: 'Service & projects', icon: 'headset', apps: ['Zoho Desk', 'Zendesk', 'Freshdesk', 'Intercom', 'Jira', 'Asana', 'monday.com', 'ClickUp']},
+      {name: 'Work & collaboration', icon: 'users', apps: ['Microsoft 365', 'Google Workspace', 'Slack', 'Microsoft Teams', 'Notion', 'Zoom']},
+      {name: 'Commerce & operations', icon: 'cart', apps: ['Shopify', 'WooCommerce', 'Cin7', 'Unleashed', 'ServiceM8', 'simPRO']},
+      {name: 'Documents & e-signature', icon: 'pen', apps: ['DocuSign', 'Zoho Sign', 'Adobe Acrobat Sign', 'PandaDoc', 'SharePoint', 'Google Drive']},
+      {name: 'Low-code & custom', icon: 'code', apps: ['Zoho Creator', 'Zoho Catalyst', 'Power Apps', 'Retool', 'Web apps & portals', 'Internal tools']},
+      {name: 'Data & storage', icon: 'database', apps: ['PostgreSQL', 'SQL Server', 'MySQL', 'BigQuery', 'Snowflake', 'Airtable']},
+      {name: 'Marketing', icon: 'megaphone', apps: ['Mailchimp', 'HubSpot Marketing', 'Zoho Campaigns', 'ActiveCampaign', 'Klaviyo', 'Google Ads']},
+      {name: 'AI', icon: 'sparkles', apps: ['Claude', 'ChatGPT', 'Gemini', 'Microsoft Copilot', 'Zia & Zia Agents', 'MCP connections']}
+    ]
   },
   engage: {
     title: 'Start where you are.',

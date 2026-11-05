@@ -1,5 +1,5 @@
 // Site-wide 2D motion: scroll reveals, word-by-word headings, drawn lines,
-// counters, the "How we partner" sequence and the homepage path runner.
+// counters, the scroll-driven "How we partner" sequence and the path runner.
 // Everything degrades to a static page when reduced motion is requested.
 const $=(s,root=document)=>root.querySelector(s);
 const $$=(s,root=document)=>[...root.querySelectorAll(s)];
@@ -15,8 +15,11 @@ function splitWords(el){
       child.replaceWith(frag);
     }else if(child.nodeType===1&&child.tagName!=='BR'&&!child.classList.contains('w'))walk(child);
   })};
-  walk(el);el.classList.add('is-split');
+  walk(el);el.classList.add('is-split');el.style.setProperty('--words',n);
 }
+// Once a heading has risen into place, stop masking it so no letter, descender or
+// full stop is ever clipped.
+function settleSplit(el){const n=+el.style.getPropertyValue('--words')||0;setTimeout(()=>el.classList.add('split-done'),1000+n*42+150);}
 
 function countUp(el){
   const target=parseFloat(el.dataset.count);if(!isFinite(target)||reduced)return;
@@ -25,11 +28,18 @@ function countUp(el){
   requestAnimationFrame(tick);
 }
 
+// How we partner: the three cards advance with the scroll (draft, signed, live) and
+// step back again when scrolling up.
 function partner(board){
-  // A short story across the three cards: draft → signed → live.
   const steps=['s1','s2','s3'];
   if(reduced){board.classList.add(...steps);return}
-  steps.forEach((s,i)=>setTimeout(()=>{board.classList.add(s);if(s==='s2')$$('[data-count]',board).forEach(countUp)},300+i*1700));
+  let ticking=false,counted=false;
+  const update=()=>{ticking=false;const r=board.getBoundingClientRect(),vh=innerHeight;
+    if(r.bottom<-300||r.top>vh+300)return;
+    const p=(vh*0.9-r.top)/(r.height+vh*0.35);
+    steps.forEach((s,i)=>board.classList.toggle(s,p>=0.12+i*0.24));
+    if(!counted&&board.classList.contains('s2')){counted=true;$$('[data-count]',board).forEach(countUp)}};
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});update();
 }
 
 function pathRunner(section){
@@ -53,16 +63,17 @@ function pathRunner(section){
 export function init(){
   window.__imbleoMotion=true;document.documentElement.classList.add('motion-ready');
   $$('[data-split]').forEach(splitWords);
-  const revealTargets=$$('[data-reveal],[data-split],[data-flow],[data-stages],[data-partner],.anatomy-feature,.case-art,.logo-strip');
-  if(reduced||!('IntersectionObserver' in window)){revealTargets.forEach(el=>el.classList.add('in'));$$('[data-partner]').forEach(partner);$$('[data-path]').forEach(el=>el.closest('section')&&pathRunner(el.closest('section')));return}
+  const revealTargets=$$('[data-reveal],[data-split],[data-flow],[data-stages],.anatomy-feature,.case-art,.logo-strip,.orch');
+  $$('[data-partner]').forEach(partner);
+  if(reduced||!('IntersectionObserver' in window)){revealTargets.forEach(el=>{el.classList.add('in');if(el.matches('[data-split]'))el.classList.add('split-done')});$$('[data-path]').forEach(el=>el.closest('section')&&pathRunner(el.closest('section')));return}
   const once=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add('in');once.unobserve(el);
-    if(el.matches('[data-partner]'))partner(el);
-    $$('[data-count]',el).forEach(c=>{if(!el.matches('[data-partner]'))countUp(c)});
+    if(el.matches('[data-split]'))settleSplit(el);
+    $$('[data-count]',el).forEach(c=>{if(!el.closest('[data-partner]'))countUp(c)});
   }),{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
   revealTargets.forEach(el=>once.observe(el));
-  // Looping 2D animations (CSS and the SVG's own SMIL motion) only run on screen.
+  // Looping 2D animations (CSS and SVG SMIL motion) only run while on screen.
   const live=new IntersectionObserver(entries=>entries.forEach(e=>{const el=e.target;el.classList.toggle('playing',e.isIntersecting);
-    if(el.matches('svg.anat')&&el.pauseAnimations)e.isIntersecting?el.unpauseAnimations():el.pauseAnimations();}),{rootMargin:'60px'});
-  $$('.case-art,.anat,.partner-board,.logo-wall,.workspace-stage').forEach(el=>live.observe(el));
+    [el,...$$('svg',el)].forEach(s=>{if(s.pauseAnimations&&s.querySelector&&s.querySelector('animateMotion'))e.isIntersecting?s.unpauseAnimations():s.pauseAnimations()});}),{rootMargin:'60px'});
+  $$('.case-art,.anat,.partner-board,.logo-wall,.orch').forEach(el=>live.observe(el));
   $$('[data-path]').forEach(el=>pathRunner(el.closest('section')));
 }
