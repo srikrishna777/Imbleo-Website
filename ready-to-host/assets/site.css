@@ -1124,18 +1124,10 @@ h1,h2,h3{color:var(--ink)}
 .footer-main>div>a.footer-email{color:var(--blue)}
 /* Services page */
 .svc-hero{padding-top:40px;padding-bottom:40px}
-.svc-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:50px;align-items:center}
 .svc-hero h1{margin:16px 0 0;font-size:clamp(46px,5.2vw,76px)}
 .svc-hero h1 .accent{color:var(--green-deep)}
 .svc-lede{font-size:17.5px;line-height:1.75;color:var(--muted);max-width:520px;margin-top:26px}
-.svc-tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:30px 10px;padding-top:20px}
-.svc-tile{display:flex;flex-direction:column;justify-content:space-between;gap:8px;aspect-ratio:.8;padding:12px;border-radius:14px;font-size:12.5px;line-height:1.25;letter-spacing:-.01em;box-shadow:0 14px 24px -18px #0b104680;transition:transform .45s var(--ease),box-shadow .3s;animation:tileIn 1s var(--ease) both calc(var(--i)*70ms + .1s)}
-.svc-tile:nth-child(2n){margin-top:-20px;margin-bottom:20px}
-.svc-tile:hover{transform:translateY(-6px) rotate(-2deg);box-shadow:0 22px 30px -18px #0b104699}
-.svc-tile .icon{width:22px;height:22px}
-.svc-tile-n{font-size:9px;letter-spacing:.12em;opacity:.75}
 @keyframes tileIn{from{opacity:0;transform:translateY(40px) scale(.85) rotate(6deg)}}
-.svc-tile.t-blue{background:var(--blue);color:#fff}.svc-tile.t-green{background:var(--green);color:var(--navy)}.svc-tile.t-peri{background:var(--peri);color:#fff}.svc-tile.t-navy{background:var(--navy);color:#fff}.svc-tile.t-mint{background:var(--mint);color:var(--navy)}
 .svc-jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:46px;padding-top:24px;border-top:1px solid var(--line)}
 .svc-jump a{padding:8px 15px;border:1px solid var(--line);border-radius:30px;font-size:14px;transition:border-color .2s,color .2s,background .2s}
 .svc-jump a:hover{border-color:var(--blue);color:var(--blue);background:var(--tint)}
@@ -1320,8 +1312,6 @@ h1,h2,h3{color:var(--ink)}
  .partner-cards,.partner-steps{gap:24px}
  .think-grid{gap:40px}
  .path-guides{grid-template-columns:1fr 1fr}
- .svc-tiles{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
- .svc-tile{font-size:11px;padding:9px}
  .stage-line{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:34px}
  .stage-line:before,.stage-line:after{display:none}
  .migration-steps{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -1345,7 +1335,7 @@ h1,h2,h3{color:var(--ink)}
  .anatomy-feature{grid-template-columns:1fr}
  .anatomy-illus{min-height:0;aspect-ratio:1.4}
  .tools-grid{grid-template-columns:1fr}
- .svc-hero-grid,.explorer,.deliver-foot,.story-intro-copy{grid-template-columns:1fr}
+ .explorer,.deliver-foot,.story-intro-copy{grid-template-columns:1fr}
  .explorer-panel{position:relative;top:auto}
  .story{grid-template-columns:1fr;gap:0}
  .story-stage-wrap{position:sticky;top:0;z-index:5;padding:8px 0;background:#fff}
@@ -1371,10 +1361,6 @@ h1,h2,h3{color:var(--ink)}
  .cube-scene{margin-bottom:46px}
  .venn{width:min(360px,100%)}
  .venn text{font-size:16px}
- .svc-tiles{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
- .svc-tile{aspect-ratio:.7;padding:7px;font-size:9px;border-radius:10px}
- .svc-tile .icon{width:16px;height:16px}
- .svc-tile:nth-child(2n){margin-top:-10px;margin-bottom:10px}
  .explorer-panel{padding:24px}
  .explorer-panel h3{font-size:25px}
  .stage-line,.migration-steps{grid-template-columns:1fr 1fr}
@@ -1448,7 +1434,7 @@ h1,h2,h3{color:var(--ink)}
 [data-split] .w{padding:0 .1em .18em 0;margin:0 -.1em -.18em 0}
 .split-done .w{overflow:visible}
 /* Navigation: Our work · Services · Contact us */
-.desktop-nav .nav-link{padding:0;font-size:14px;line-height:inherit;color:inherit}
+.desktop-nav .nav-link{padding:0;font-size:inherit;line-height:inherit;color:inherit}
 .desktop-nav .nav-link:hover{color:var(--blue)}
 .desktop-nav{gap:30px}
 /* Footer card reaches close to the page edges, with more room inside */
@@ -1714,22 +1700,6 @@ h1,h2,h3{color:var(--ink)}
 .chip-core>svg{width:58%;height:auto}
 .disc.playing .chip>svg{animation:spin 110s linear infinite reverse}
 /* Services: interactive flip tiles */
-.svc-tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding-top:0}
-.svc-tiles .svc-tile{position:relative;display:block;aspect-ratio:.8;margin:0;padding:0;border-radius:16px;background:transparent;box-shadow:none;color:inherit;text-align:left;perspective:900px}
-.svc-tiles .svc-tile:hover{transform:none;box-shadow:none}
-.svc-flip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s var(--ease)}
-.svc-tile:hover .svc-flip,.svc-tile:focus-visible .svc-flip{transform:rotateY(180deg)}
-.svc-tile:focus-visible{outline:none}
-.svc-tile:focus-visible .svc-face{outline:2px solid var(--blue);outline-offset:3px}
-.svc-face{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;gap:6px;padding:12px;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 14px 26px -18px #0b104699;font-size:12.5px;line-height:1.25}
-.svc-face .icon{width:22px;height:22px}
-.svc-face.back{transform:rotateY(180deg);background:#fff;border:1.5px solid var(--blue);color:var(--ink)}
-.svc-back-line{font-size:12px;line-height:1.45}
-.svc-back-cta{display:flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;color:var(--blue)}
-.svc-back-cta .icon{width:12px;height:12px}
-.svc-tile.t-blue .front{background:var(--blue);color:#fff}.svc-tile.t-green .front{background:var(--green);color:var(--navy)}.svc-tile.t-peri .front{background:var(--peri);color:#fff}.svc-tile.t-navy .front{background:var(--navy);color:#fff}.svc-tile.t-mint .front{background:var(--mint);color:var(--navy)}
-.svc-tile.t-green .back,.svc-tile.t-mint .back{border-color:var(--green)}.svc-tile.t-green .back .svc-back-cta,.svc-tile.t-mint .back .svc-back-cta{color:var(--green-deep)}
-.svc-tile.t-navy .back{border-color:var(--navy)}.svc-tile.t-peri .back{border-color:var(--peri)}
 /* Services: explorer card keeps one size */
 .explorer-panels{display:grid}
 .explorer-panels>.explorer-panel{grid-area:1/1;position:relative;top:auto}
@@ -1772,7 +1742,6 @@ h1,h2,h3{color:var(--ink)}
  .sketch-frame{height:auto;width:100%;aspect-ratio:600/440}
  .decide{grid-template-columns:1fr 1fr}
  .d-q:after{display:none}
- .svc-tiles{grid-template-columns:repeat(5,minmax(0,1fr))}
 }
 @media(max-width:700px){
  .footer{padding:0 6px 6px}
@@ -1784,13 +1753,8 @@ h1,h2,h3{color:var(--ink)}
  .car-btn{width:40px;height:40px}
  .car-btn.prev{left:-6px}.car-btn.next{right:-6px}
  .disc{margin:30px auto 0}
- .svc-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
- .svc-tiles .svc-tile{aspect-ratio:1.25}
  .decide{grid-template-columns:1fr}
  .platform-grid{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){
- .svc-flip{transition:none}
 }
 .sketch-note.note-order{top:12px;bottom:auto;right:22px}
 
@@ -1818,9 +1782,6 @@ h1,h2,h3{color:var(--ink)}
 .case-section{margin-bottom:40px}
 .case-next{padding:28px 0 52px}
 .footer-card .footer-main{padding:46px 0 38px}
-.svc-face{font-size:13.5px}
-.svc-back-line{font-size:13px}
-.svc-back-cta{font-size:11.5px}
 @media(max-width:1100px){
  .section-space{padding-top:64px;padding-bottom:64px}
 }
@@ -1836,11 +1797,6 @@ h1,h2,h3{color:var(--ink)}
  .story-end-card{padding:36px 24px}
  .case-content-layout{padding:30px 0 40px;gap:30px}
  .footer-card .footer-main{padding:32px 0 26px}
- .svc-face{font-size:14px}
-}
-@media(min-width:701px) and (max-width:1150px){
- .svc-face{font-size:12.5px}
- .svc-back-line{font-size:12px}
 }
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* IMBLEO word cycle: one word at a time, same central spot (wordcycle.js) */
@@ -1899,4 +1855,61 @@ h1,h2,h3{color:var(--ink)}
 }
 @media(prefers-reduced-motion:reduce){
  .case-cloud.playing .cp,.case-cloud.playing .cloud-mist i{animation:none}
+}
+
+/* Services hero: the deck layout. Title left, intro right, then ten landscape tiles in a
+   staggered 5 x 2 grid (columns two and four sit higher). Tile type scales with the tile
+   (container units), so the flip side always fits. */
+.svc-hero-head{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:56px;align-items:start;margin-top:14px}
+.svc-hero h1{margin:0;font-size:clamp(44px,4.7vw,68px);letter-spacing:-.055em}
+.svc-hero h1 .accent{color:var(--green-deep)}
+.svc-lede{margin:6px 0 0;max-width:470px;font-size:17.5px;line-height:1.7;color:var(--muted)}
+.svc-tiles{--lift:-17%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px 18px;margin-top:40px;padding-top:34px}
+.svc-tile{position:relative;display:block;aspect-ratio:1.36;padding:0;border:0;border-radius:20px;background:none;color:inherit;text-align:left;perspective:1000px;container-type:inline-size;cursor:pointer}
+.svc-tile:nth-child(5n+2),.svc-tile:nth-child(5n+4){translate:0 var(--lift)}
+.svc-flip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s var(--ease)}
+.svc-tile:hover .svc-flip,.svc-tile:focus-visible .svc-flip{transform:rotateY(180deg)}
+.svc-tile:focus-visible{outline:none}
+.svc-tile:focus-visible .svc-face{outline:2px solid var(--blue);outline-offset:3px}
+.svc-face{position:absolute;inset:0;display:flex;flex-direction:column;padding:9cqw 9.5cqw;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 20px 34px -24px #0b1046a6}
+.svc-tile-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.svc-tile-n{font-size:max(12px,6.4cqw);font-weight:600;letter-spacing:.02em;line-height:1}
+.svc-tile-top .icon{width:max(20px,12.5cqw);height:max(20px,12.5cqw);margin:-1.5cqw -1cqw 0 0;stroke-width:1.8}
+.svc-tile-t{margin-top:auto;font-size:clamp(15px,8.6cqw,23px);font-weight:600;line-height:1.12;letter-spacing:-.025em}
+.svc-face.front{color:var(--tone-ink)}
+.svc-tile.t-blue{--tone:var(--blue);--tone-ink:#fff}
+.svc-tile.t-green{--tone:var(--green);--tone-ink:var(--navy)}
+.svc-tile.t-peri{--tone:#b7bcf4;--tone-ink:var(--navy)}
+.svc-tile.t-navy{--tone:var(--navy);--tone-ink:#fff}
+.svc-tile.t-mint{--tone:var(--mint);--tone-ink:var(--navy)}
+.svc-face.front{background:var(--tone)}
+.svc-face.back{transform:rotateY(180deg);gap:3.6cqw;background:#fff;border:2px solid var(--tone);color:var(--ink)}
+.svc-face.back .svc-tile-n{color:var(--muted)}
+.svc-back-line{font-size:clamp(12px,6.1cqw,15.5px);line-height:1.38}
+.svc-back-cta{margin-top:auto;display:flex;align-items:center;gap:.35em;white-space:nowrap;font-size:clamp(11px,5.3cqw,14px);font-weight:600;color:var(--blue)}
+.svc-back-cta .icon{width:1.05em;height:1.05em}
+.svc-tile.t-green .back .svc-back-cta,.svc-tile.t-mint .back .svc-back-cta{color:var(--green-deep)}
+.svc-tile.t-mint .back{border-color:#9fd889}
+.svc-tile.t-peri .back{border-color:#9aa1ee}
+@media(max-width:1100px){
+ .svc-hero-head{grid-template-columns:1fr;gap:18px}
+ .svc-tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px 14px;margin-top:30px}
+ .svc-tile:nth-child(5n+2),.svc-tile:nth-child(5n+4){translate:none}
+ .svc-tile:nth-child(3n+2){translate:0 var(--lift)}
+}
+@media(max-width:700px){
+ .svc-tiles{--lift:-12%;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 10px;padding-top:22px}
+ .svc-tile{aspect-ratio:1.12;border-radius:16px}
+ .svc-face{border-radius:16px;padding:8.5cqw 8cqw}
+ .svc-tile:nth-child(3n+2){translate:none}
+ .svc-tile:nth-child(2n){translate:0 var(--lift)}
+}
+@media(max-width:700px){
+ .svc-hero h1{font-size:clamp(34px,10.4vw,44px)}
+}
+@media(max-width:420px){
+ .svc-tile{aspect-ratio:1}
+}
+@media(prefers-reduced-motion:reduce){
+ .svc-flip{transition:none}
 }

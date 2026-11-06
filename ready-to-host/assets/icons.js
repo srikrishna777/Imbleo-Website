@@ -41,17 +41,17 @@ const paths = {
  bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2ZM10 20a2 2 0 0 0 4 0"/>',
  lock:'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/>',
  send:'<path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z"/>',
- /* Service icons, matched to the services deck */
- discover:'<circle cx="10" cy="10" r="6"/><path d="M14.5 14.5 20 20M7 10h6M10 7v6"/>',
- architecture:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="8.5" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v2h11v-2M12 12v2"/>',
- funnel:'<path d="M3 5h18l-6 7v6l-6 2v-8z"/>',
- implement:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11M11 13h7M11 16h5"/>',
- integrate:'<circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 12c4 0 5-6 9-6M7.5 12c4 0 5 6 9 6"/>',
- migrate:'<ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/>',
- report:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
- 'ai-ops':'<path d="m12 3 1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="m18 15 .8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
- 'custom-app':'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h5M14 16l2 2 3-4"/>',
- adopt:'<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c.8-3.6 2.8-5.5 5-5.5s4.2 1.9 5 5.5M14 19.5c.5-2.6 1.7-4 3-4s2.5 1.4 3 4"/>',
+ /* Service icons, drawn to match the services deck */
+ discover:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.4 15.4 5.1 5.1"/>',
+ architecture:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.2" fill="currentColor"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.2" fill="currentColor"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.2"/>',
+ funnel:'<path d="M3.5 6.5h17M7 12h10M10 17.5h4" stroke-width="2.4"/>',
+ implement:'<rect x="3.4" y="3.7" width="5" height="5" rx="1" fill="currentColor" stroke="none"/><rect x="3.4" y="9.7" width="5" height="5" rx="1" fill="currentColor" stroke="none"/><rect x="4.2" y="16.5" width="3.4" height="3.4" rx=".7"/><path d="M11.2 6.2h9.3M11.2 12.2h9.3M11.2 18.2h9.3" stroke-width="2"/>',
+ integrate:'<circle cx="5" cy="12" r="2.7" fill="currentColor"/><circle cx="19" cy="12" r="2.7" fill="currentColor"/><path d="M8.2 12h7.6" stroke-width="2"/>',
+ migrate:'<rect x="2.5" y="6" width="6" height="12" rx="2.2"/><path d="M10.6 12h4.4m-2.1-2.2 2.2 2.2-2.2 2.2"/><rect x="16" y="6" width="6" height="12" rx="2.2" fill="currentColor"/>',
+ report:'<g fill="currentColor" stroke="none"><rect x="4" y="13" width="4.2" height="7.5" rx=".7"/><rect x="9.9" y="8.5" width="4.2" height="12" rx=".7"/><rect x="15.8" y="3.5" width="4.2" height="17" rx=".7"/></g>',
+ 'ai-ops':'<path fill="currentColor" stroke="none" d="M12 2.8c.9 5.2 3.9 8.2 9.2 9.2-5.3 1-8.3 4-9.2 9.2-1-5.2-4-8.2-9.2-9.2 5.2-1 8.2-4 9.2-9.2Z"/>',
+ 'custom-app':'<rect x="3.2" y="3.2" width="17.6" height="17.6" rx="3.6"/><rect x="6.6" y="6.6" width="4.6" height="10.8" rx="1"/><rect x="13.2" y="6.6" width="4.2" height="4.2" rx="1"/><rect x="13.2" y="13.2" width="4.2" height="4.2" rx="1"/>',
+ adopt:'<g fill="currentColor" stroke="none"><circle cx="7.6" cy="7.6" r="3.4"/><path d="M1.6 20.2c0-4.1 2.7-6.8 6-6.8s6 2.7 6 6.8Z"/><circle cx="16.6" cy="7.6" r="3.4"/><path d="M14.9 20.2c0-2.6-.7-4.8-2-6.2.9-.4 1.7-.6 2.7-.6 3.3 0 6 2.7 6 6.8Z"/></g>',
  pen:'<path d="M15 4l5 5L9 20H4v-5L15 4Z"/>'
 };
 export function icon(name, cls='') {return `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths.cube}</svg>`;}
