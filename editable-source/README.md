@@ -18,10 +18,10 @@ npm run dev
 
 Open http://localhost:4173. Deploy the contents of `dist/` to any static host. Directory index support is required for `/work/`, `/services/`, `/business-anatomy/` and the case-study routes.
 
-- `src/home.html`: homepage sections and copy. The hero story (six people and the hand-offs Imbleo makes between them), the case-study carousel with its cloud of further cases and the Tools disc are generated in `scripts/build.mjs` (`heroOrch`, `carousel`, `disc`). The IMBLEO word cycle sits directly under the hero.
+- `src/home.html`: homepage sections and copy. The hero story (six people and the hand-offs Imbleo makes between them), the case-study carousel with the next cases peeking in below it, and the Tools disc are generated in `scripts/build.mjs` (`heroOrch`, `carousel`, `disc`). The IMBLEO word cycle sits directly under the hero.
 - `src/services.js`: the homepage "One path" steps, the tool categories, and all `/services/` content.
 - `src/anatomy.js`: the Business Anatomy scroll story (chapters, end card) and its hand-drawn illustration (same pencil style as the homepage sketch), also used on the homepage.
-- `src/cases.js`: all 11 case studies and their source qualifications. The first six appear in the homepage carousel; the rest float above "See more".
+- `src/cases.js`: all 11 case studies and their source qualifications. The first six appear in the homepage carousel; the next three peek in below it, blurred and fading, behind "See more".
 - `src/logos.js`: platform brand marks vendored from Simple Icons (CC0). The Tools disc inlines the ones it uses; the Services platform chips share the cached sprite `assets/logos.svg` written by the build. Brands without a Simple Icons mark get a tinted initial.
 - `scripts/build.mjs`: page layouts, header and footer, case-study rendering (each case has its own animated illustration, see `ART` and `artInner`), contact address, and canonical site origin.
 - `public/assets/site.css`: responsive visual system and all animation styles.
@@ -62,4 +62,4 @@ Rebuild after editing. Fonts (DM Sans and Caveat for the hand-drawn notes) have 
 
 `npm run check` covers every local page, route, asset, imported module (including dynamic imports), anchor, ARIA reference, original case-study metric qualification, and the Zoho-free homepage rule. The build produces 16 HTML pages, including 11 individual case studies.
 
-Browser checks for this version (Chromium via Playwright): desktop and phone layouts, no horizontal scrolling at 360 to 1280 px, the hero story steps, the IMBLEO word order, timing and centring, scroll-driven states of the sketch, the How we partner cards (all three steps within about 300 px of scroll), the Tools disc and the story, the case-study carousel and cloud, explorer tabs and flip tiles, platform logos, the contact dialog, and reduced-motion mode. Review on real phones before a public launch. The contact flow prepares drafts; there is no live form backend.
+Browser checks for this version (Chromium via Playwright): desktop and phone layouts, no horizontal scrolling at 360 to 1280 px, the hero story steps, the IMBLEO word order, timing and centring, scroll-driven states of the sketch, the How we partner cards (all three steps within about 300 px of scroll), the Tools disc and the story, the case-study carousel and the faded preview row, explorer tabs and flip tiles, platform logos, the contact dialog, and reduced-motion mode. Review on real phones before a public launch. The contact flow prepares drafts; there is no live form backend.

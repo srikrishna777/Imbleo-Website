@@ -36,6 +36,6 @@ CHECKS
 Passed: JavaScript syntax, 16 page routes, asset and module links, fragment links,
 ARIA references, original metric qualifications, and the Zoho-free homepage.
 Browser checks (Chromium): desktop and phone layouts, scroll animations,
-hero story, IMBLEO word cycle, carousel and case cloud, explorer tabs and
+hero story, IMBLEO word cycle, carousel and case preview row, explorer tabs and
 flip tiles, platform logos, contact dialog, reduced motion, no console
 errors or failed requests on any page, and frame-rate checks.

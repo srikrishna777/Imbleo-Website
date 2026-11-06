@@ -117,11 +117,10 @@ const discIcons=[['mark',0,0,'core'],
 const discUsed=[...discRing2,...discRing3];
 const disc=`<div class="disc" data-disc aria-hidden="true"><svg class="lg-defs" width="0" height="0" aria-hidden="true" focusable="false">${discUsed.map(logoSymbol).join('')}</svg><div class="disc-glow"></div><div class="disc-orbit">${discIcons.map(([n,r,a,t],i)=>{const rad=a*Math.PI/180;return `<span class="chip chip-${t}" style="--x:${(Math.cos(rad)*r*100).toFixed(2)};--y:${(Math.sin(rad)*r*100).toFixed(2)};--n:${i}">${n==='mark'?brandMark:t==='logo'?useLogo(n):icon(n)}</span>`;}).join('')}</div></div>`;
 const FEATURED=6;
-const cloudCases=cases.slice(FEATURED);
-// The remaining case studies float above "See more" as soft clouds (near ones crisp, far ones hazy).
-const cloudSpots=[[15,10,1],[34,60,0],[53,8,1],[71,58,2],[86,12,0],[20,88,2],[66,90,2]];
-const caseCloud=`<div class="case-cloud" data-cloud><div class="cloud-mist" aria-hidden="true"><i></i><i></i><i></i><i></i></div><ul class="cloud-pills" aria-label="More case studies">${cloudCases.map((c,i)=>{const [x,y,z]=cloudSpots[i%cloudSpots.length];return `<li class="cp z${z}" style="--x:${x};--y:${y};--n:${i}"><a href="/work/${c.slug}/"><span class="cp-dot"></span>${esc(homeShort(c))}</a></li>`}).join('')}</ul></div>`;
-const carousel=`<div class="carousel" data-carousel><button class="car-btn prev" aria-label="Previous case studies" disabled>${icon('arrow-left')}</button><div class="car-track" tabindex="0" role="region" aria-label="Case studies">${cases.slice(0,FEATURED).map((c,i)=>caseCard(c,i,true)).join('')}</div><button class="car-btn next" aria-label="Next case studies">${icon('arrow-right')}</button></div>${caseCloud}<div class="car-more"><a class="button light" href="/work/">See more ${icon('arrow-up-right')}</a></div>`;
+// Below the carousel, the next case studies peek in: real cards, blurred and fading into the
+// background, with "See more" sitting over the fade. Inert, so only "See more" takes focus.
+const casePeek=`<div class="case-peek" inert aria-hidden="true"><div class="peek-grid">${cases.slice(FEATURED,FEATURED+3).map((c,j)=>caseCard(c,FEATURED+j,true)).join('')}</div></div>`;
+const carousel=`<div class="carousel" data-carousel><button class="car-btn prev" aria-label="Previous case studies" disabled>${icon('arrow-left')}</button><div class="car-track" tabindex="0" role="region" aria-label="Case studies">${cases.slice(0,FEATURED).map((c,i)=>caseCard(c,i,true)).join('')}</div><button class="car-btn next" aria-label="Next case studies">${icon('arrow-right')}</button></div>${casePeek}<div class="car-more"><a class="button light" href="/work/">See more ${icon('arrow-up-right')}</a></div>`;
 let home=readFileSync('src/home.html','utf8')
  .replace('{{hero-orch}}',heroOrch)
  .replace('{{carousel}}',carousel)

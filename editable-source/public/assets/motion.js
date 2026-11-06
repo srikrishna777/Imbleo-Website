@@ -87,6 +87,6 @@ export function init(){
   // Looping 2D animations (CSS and SVG SMIL motion) only run while on screen.
   const live=new IntersectionObserver(entries=>entries.forEach(e=>{const el=e.target;el.classList.toggle('playing',e.isIntersecting);
     [el,...$$('svg',el)].forEach(s=>{if(s.pauseAnimations&&s.querySelector&&s.querySelector('animateMotion'))e.isIntersecting?s.unpauseAnimations():s.pauseAnimations()});}),{rootMargin:'60px'});
-  $$('.case-art,.anat,.partner-board,.orch,.case-cloud').forEach(el=>live.observe(el));
+  $$('.case-art,.anat,.partner-board,.orch').forEach(el=>live.observe(el));
   $$('[data-path]').forEach(el=>pathRunner(el.closest('section')));
 }

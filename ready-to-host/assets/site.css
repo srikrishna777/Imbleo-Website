@@ -1413,14 +1413,14 @@ h1,h2,h3{color:var(--ink)}
 .partner-section,.path-section,.work-section,.anatomy-section,.tools-section,.story-end{content-visibility:auto}
 .partner-section{contain-intrinsic-size:auto 768px}
 .path-section{contain-intrinsic-size:auto 772px}
-.work-section{contain-intrinsic-size:auto 1030px}
+.work-section{contain-intrinsic-size:auto 1053px}
 .anatomy-section{contain-intrinsic-size:auto 672px}
 .tools-section{contain-intrinsic-size:auto 780px}
 .story-end{contain-intrinsic-size:auto 817px}
 @media(max-width:700px){
  .partner-section{contain-intrinsic-size:auto 1225px}
  .path-section{contain-intrinsic-size:auto 1452px}
- .work-section{contain-intrinsic-size:auto 1063px}
+ .work-section{contain-intrinsic-size:auto 938px}
  .anatomy-section{contain-intrinsic-size:auto 749px}
  .tools-section{contain-intrinsic-size:auto 889px}
  .story-end{contain-intrinsic-size:auto 1224px}
@@ -1820,41 +1820,24 @@ h1,h2,h3{color:var(--ink)}
 /* Tools disc: Imbleo service symbols inside, platform logos around them */
 .chip-logo{background:#fff}
 .chip>svg.lg{width:min(66%,calc(44% * var(--r,1)));height:auto;aspect-ratio:var(--r,1)}
-/* More case studies, drifting like clouds above "See more" */
-.case-cloud{position:relative;height:150px;margin-top:18px}
-.cloud-mist{position:absolute;inset:-20px -2%;pointer-events:none;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.cloud-mist i{position:absolute;top:var(--t);left:var(--l);width:var(--w);height:120px;border-radius:50%;background:radial-gradient(closest-side,#ffffff 0%,#ffffffd9 45%,#fff0 100%)}
-.cloud-mist i:nth-child(1){--l:2%;--t:10px;--w:34%}
-.cloud-mist i:nth-child(2){--l:26%;--t:60px;--w:30%;background:radial-gradient(closest-side,#e8ebff 0%,#eef0ffc0 45%,#eef0ff00 100%)}
-.cloud-mist i:nth-child(3){--l:50%;--t:0;--w:34%}
-.cloud-mist i:nth-child(4){--l:70%;--t:56px;--w:30%;background:radial-gradient(closest-side,#e9f6e2 0%,#eef8e9c0 45%,#eef8e900 100%)}
-.case-cloud.playing .cloud-mist i{animation:mistDrift 22s ease-in-out infinite alternate}
-.case-cloud.playing .cloud-mist i:nth-child(2n){animation-duration:28s;animation-direction:alternate-reverse}
-@keyframes mistDrift{to{transform:translateX(6%)}}
-.cloud-pills{position:relative;height:100%;margin:0;padding:0;list-style:none}
-.cp{position:absolute;left:calc(var(--x) * 1%);top:calc(var(--y) * 1%);translate:-50% 0}
-.cp a{display:inline-flex;align-items:center;gap:9px;padding:10px 16px;border-radius:999px;background:#ffffffe6;border:1px solid #e3e6f6;box-shadow:0 16px 30px -22px #1e2c9b80;font-size:14.5px;font-weight:500;letter-spacing:-.01em;color:var(--ink);white-space:nowrap;transition:opacity .3s,filter .3s,box-shadow .3s,transform .3s}
-.cp-dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:0 0 auto}
-.cp.z0 a{opacity:.5;filter:blur(.8px);transform:scale(.94)}
-.cp.z2 a{opacity:.78;transform:scale(.97)}
-.cp a:hover,.cp a:focus-visible{opacity:1;filter:none;transform:translateY(-3px);box-shadow:0 20px 34px -20px #1e2c9b99;color:var(--blue)}
-.case-cloud.playing .cp{animation:cloudFloat calc(10s + var(--n) * 1.7s) ease-in-out calc(var(--n) * -2.3s) infinite alternate}
-@keyframes cloudFloat{from{transform:translate(-10px,3px)}to{transform:translate(12px,-4px)}}
-.case-cloud+.car-more{margin-top:14px}
+/* More case studies peek in under the carousel: blurred, fading into the background,
+   with "See more" over the fade */
+.case-peek{position:relative;height:290px;margin-top:26px;overflow:hidden;pointer-events:none;user-select:none;-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.38) 42%,transparent 90%);mask-image:linear-gradient(180deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.38) 42%,transparent 90%)}
+.peek-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:32px;padding:0 2px;filter:blur(3px)}
+.case-peek *{animation:none!important;transition:none!important}
+.case-peek+.car-more{position:relative;z-index:2;margin-top:-118px}
+.car-more .button{min-height:56px;padding:16px 30px;gap:14px;background:#fff;border-color:#d9ddf2;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 22px 44px -22px #1e2c9b80}
+.car-more .button .icon{width:18px;height:18px;stroke-width:2}
+.car-more .button:hover{background:var(--blue);border-color:var(--blue);color:#fff}
 @media(max-width:1150px){
- .cp a{font-size:13.5px;padding:9px 13px}
- .cp{translate:-50% 0}
+ .peek-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .peek-grid>:nth-child(3){display:none}
 }
-@media(max-width:900px){
- .case-cloud{height:auto;margin-top:14px;padding:6px 0}
- .cloud-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 12px;height:auto}
- .cp{position:relative;left:auto;top:auto;translate:none}
- .cp.z0 a,.cp.z2 a{filter:none;opacity:.8;transform:none}
- .case-cloud.playing .cp{animation-name:cloudBob}
- @keyframes cloudBob{from{transform:translateY(2px)}to{transform:translateY(-3px)}}
-}
-@media(prefers-reduced-motion:reduce){
- .case-cloud.playing .cp,.case-cloud.playing .cloud-mist i{animation:none}
+@media(max-width:700px){
+ .case-peek{height:240px;margin-top:20px}
+ .peek-grid{grid-template-columns:86%;column-gap:16px}
+ .peek-grid>:nth-child(n+2){display:none}
+ .case-peek+.car-more{margin-top:-104px}
 }
 
 /* Services hero: the deck layout. Title left, intro right, then ten landscape tiles in a
