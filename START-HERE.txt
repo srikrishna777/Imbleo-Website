@@ -28,7 +28,8 @@ metric notes are retained. Status labels are not shown as badges.
 Mock interfaces are clearly illustrative and use fictional sample data.
 
 The homepage does not mention Zoho (npm run check enforces this).
-The logos under the hero are placeholders until real logos are approved.
+Under the hero is the IMBLEO word cycle (Intelligence Meets Business,
+Listen, Engineer, Own), one word at a time.
 The original logo file is editable-source/public/assets/logo.jpeg.
 
 CHECKS

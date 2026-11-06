@@ -18,7 +18,7 @@ npm run dev
 
 Open http://localhost:4173. Deploy the contents of `dist/` to any static host. Directory index support is required for `/work/`, `/services/`, `/business-anatomy/` and the case-study routes.
 
-- `src/home.html`: homepage sections and copy. The hero story (six people and the hand-offs Imbleo makes between them), the case-study carousel with its cloud of further cases, the logo wall and the Tools disc are generated in `scripts/build.mjs` (`heroOrch`, `carousel`, `logoWall`, `disc`).
+- `src/home.html`: homepage sections and copy. The hero story (six people and the hand-offs Imbleo makes between them), the case-study carousel with its cloud of further cases and the Tools disc are generated in `scripts/build.mjs` (`heroOrch`, `carousel`, `disc`). The IMBLEO word cycle sits directly under the hero.
 - `src/services.js`: the homepage "One path" steps, the tool categories, and all `/services/` content.
 - `src/anatomy.js`: the Business Anatomy scroll story (chapters, end card) and its hand-drawn illustration (same pencil style as the homepage sketch), also used on the homepage.
 - `src/cases.js`: all 11 case studies and their source qualifications. The first six appear in the homepage carousel; the rest float above "See more".
@@ -41,7 +41,7 @@ Performance: looping animations use only `transform` and `opacity`, pause when o
 ## Homepage rules
 
 - No mention of Zoho anywhere on the homepage. `npm run check` fails if the word appears in `dist/index.html`. Platform names live on `/services/` and in the case studies.
-- Logos in the strip under the hero are placeholders that blink out and pop back in. Replace the `logoWall` markup in `scripts/build.mjs` when real client logos are approved (use only logos you have permission to show).
+- There is no logo strip under the hero; the IMBLEO word cycle takes that place.
 - The blue card is the footer on every page. The separate "Let's make it work" call to action was removed.
 - Navigation is Our work, Services and Contact us (plus the Let's talk button). No em or en dashes in visible text.
 - Case studies do not show delivery-status labels or tool tags on cards, in the carousel or on the case pages. Each case page still states in plain words whether the work was delivered, partly delivered, a design or a prototype.

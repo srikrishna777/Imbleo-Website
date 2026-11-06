@@ -829,22 +829,6 @@ h1,h2,h3{color:var(--ink)}
 .workspace-stage.playing .vertical-thread:after{animation:threadDrop 1.8s linear infinite}
 @keyframes threadDrop{from{transform:translateY(-2px);opacity:0}20%{opacity:1}to{transform:translateY(12px);opacity:0}}
 /* Logo placeholders */
-.logo-strip{display:flex;align-items:center;gap:44px;padding:32px 0 36px;border-bottom:1px solid var(--line)}
-.logo-strip-label{flex:0 0 auto;font-size:12.5px;color:var(--muted);line-height:1.8}
-.logo-strip-label strong{font-weight:500;color:var(--ink)}
-.logo-wall{flex:1;min-width:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
-.logo-slot{position:relative;height:46px;border-radius:12px;transition:background .3s}
-.logo-slot:hover{background:var(--tint)}
-.logo-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:9px;color:#a2a8cc;font-size:18px;font-weight:650;letter-spacing:-.03em;white-space:nowrap}
-.logo-ph svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
-.logo-ph.v1 span{font-weight:400;font-style:italic}
-.logo-ph.v2 span{letter-spacing:.12em;font-size:13px;text-transform:uppercase}
-.logo-ph.b{opacity:0;transform:scale(.55)}
-.logo-wall.playing .logo-ph.a{animation:logoOut 9s var(--ease) infinite;animation-delay:calc(var(--i)*.6s)}
-.logo-wall.playing .logo-ph.b{animation:logoIn 9s var(--ease) infinite;animation-delay:calc(var(--i)*.6s)}
-.logo-slot:hover .logo-ph{color:var(--blue)}
-@keyframes logoOut{0%,38%{opacity:1;transform:none}40%{opacity:.2}41%{opacity:1}44%,92%{opacity:0;transform:scale(.55)}97%,100%{opacity:1;transform:none}}
-@keyframes logoIn{0%,44%{opacity:0;transform:scale(.55)}50%{opacity:1;transform:scale(1.12)}54%,88%{opacity:1;transform:none}90%{opacity:.2}91%{opacity:1}94%,100%{opacity:0;transform:scale(.55)}}
 /* How we partner */
 .partner-section{padding-top:96px;padding-bottom:30px}
 .partner-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:34px}
@@ -1370,10 +1354,6 @@ h1,h2,h3{color:var(--ink)}
  .story-step{min-height:62vh}
 }
 @media(max-width:700px){
- .logo-strip{display:block;padding:24px 0 28px}
- .logo-wall{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
- .logo-ph{font-size:15px}
- .logo-strip-label{display:block;margin-bottom:16px}
  .partner-section{padding-top:64px}
  .partner-board{padding:22px 16px 40px;border-radius:18px}
  .pcard-pop{left:18%}
@@ -1821,7 +1801,6 @@ h1,h2,h3{color:var(--ink)}
 .section-space{padding-top:76px;padding-bottom:76px}
 .section-kicker{margin-bottom:30px}
 .section-heading{margin-bottom:30px}
-.logo-strip{padding:24px 0 26px}
 .partner-section{padding-top:24px;padding-bottom:12px}
 .think-section{margin-top:36px}
 .think-inner{padding-top:26px;padding-bottom:22px}
@@ -1865,14 +1844,14 @@ h1,h2,h3{color:var(--ink)}
 }
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* IMBLEO word cycle: one word at a time, same central spot (wordcycle.js) */
-.wc-band{padding:30px 0 4px}
+.wc-band{padding:44px 0 8px}
 .word-cycle{position:relative;height:40px;margin:0;overflow:visible}
 .wc-word{position:absolute;inset:0;display:block;text-align:center;white-space:nowrap;font-size:30px;line-height:40px;font-weight:500;letter-spacing:-.035em;color:var(--ink);opacity:0}
 .wc-word:first-of-type{opacity:1}
 .wc-live .wc-word{opacity:0;will-change:opacity,transform}
 .wc-word b{font-weight:600;color:var(--green)}
 @media(max-width:700px){
- .wc-band{padding:22px 0 0}
+ .wc-band{padding:32px 0 4px}
  .wc-word{font-size:26px}
 }
 /* Brand marks (Simple Icons) */
