@@ -17,8 +17,8 @@ After building, copy editable-source/dist/ over ready-to-host/ to update it.
 Do not open ready-to-host/index.html directly through file://.
 The site uses module scripts and root-relative routes, so use an HTTP server.
 
-The contact flow prepares an email draft addressed to adiedubus@gmail.com,
-the contact provided in the source portfolio. No enquiry is sent automatically.
+The contact flow prepares an email draft addressed to talktous@imbleo.com.
+No enquiry is sent automatically.
 Update the address in editable-source/scripts/build.mjs and
 editable-source/public/assets/app.js when the company inbox is ready.
 
@@ -35,5 +35,6 @@ CHECKS
 Passed: JavaScript syntax, 16 page routes, asset and module links, fragment links,
 ARIA references, original metric qualifications, and the Zoho-free homepage.
 Browser checks (Chromium): desktop and phone layouts, scroll animations,
-carousel, explorer tabs and flip tiles, contact dialog, reduced motion,
-no console errors or failed requests on any page, and frame-rate checks.
+hero story, IMBLEO word cycle, carousel and case cloud, explorer tabs and
+flip tiles, platform logos, contact dialog, reduced motion, no console
+errors or failed requests on any page, and frame-rate checks.

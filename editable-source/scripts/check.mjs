@@ -14,6 +14,8 @@ for(const path of pages){
   if(duplicates.length)errors.push(`${path}: duplicate IDs ${duplicates}`);
   for(const ref of html.matchAll(/aria-(?:controls|labelledby)="([^"]+)"/g))for(const id of ref[1].split(/\s+/))if(!pageIds.includes(id))errors.push(`${path}: missing ARIA target ${id}`);
  }
+ // SVG <use> references: inline symbols on the page, or the shared logo sprite.
+ for(const u of html.matchAll(/<use href="([^"#]*)#([^"]+)"/g)){const file=u[1]?join(root,u[1]):path;if(!existsSync(file)||!readFileSync(file,'utf8').includes(`id="${u[2]}"`))errors.push(`${path}: missing symbol ${u[1]}#${u[2]}`);}
  for(const link of html.matchAll(/<(?:a|link|script)\b[^>]*?(?:href|src)="([^"]+)"/g)){
   if(/^[a-z][a-z\d+.-]*:|^\/\//i.test(link[1]))continue;
   const [url,fragment]=link[1].split('#');const pathname=url.split('?')[0];
@@ -43,5 +45,5 @@ const homeHtml=readFileSync(join(root,'index.html'),'utf8');
 if(/zoho/i.test(homeHtml))errors.push('index.html: the homepage mentions Zoho');
 for(const required of ['services/index.html','business-anatomy/index.html'])if(!existsSync(join(root,required)))errors.push(`Missing page: ${required}`);
 if(errors.length){console.error(errors.join('\n'));process.exit(1);}
-console.log(`PASS: ${pages.length} HTML pages, ${cases.length} detailed case studies, local routes, asset/module links (including dynamic imports), fragments, ARIA references, original metric qualifiers, and a Zoho-free homepage.`);
+console.log(`PASS: ${pages.length} HTML pages, ${cases.length} detailed case studies, local routes, asset/module links (including dynamic imports), fragments, SVG symbol references, ARIA references, original metric qualifiers, and a Zoho-free homepage.`);
 console.log('Browser layout and runtime interaction QA remain separate checks.');

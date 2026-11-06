@@ -36,8 +36,9 @@ function partner(board){
   let ticking=false,counted=false;
   const update=()=>{ticking=false;const r=board.getBoundingClientRect(),vh=innerHeight;
     if(r.bottom<-300||r.top>vh+300)return;
-    const p=(vh*0.9-r.top)/(r.height+vh*0.35);
-    steps.forEach((s,i)=>board.classList.toggle(s,p>=0.12+i*0.24));
+    const cards=$$('.pcard',board),stacked=cards.length>2&&cards[2].getBoundingClientRect().top-cards[0].getBoundingClientRect().top>40;
+    if(stacked)steps.forEach((s,i)=>board.classList.toggle(s,cards[i].getBoundingClientRect().top<vh*0.8));
+    else{const p=(vh*0.94-r.top)/(vh*0.5);steps.forEach((s,i)=>board.classList.toggle(s,p>=0.06+i*0.2));}
     if(!counted&&board.classList.contains('s2')){counted=true;$$('[data-count]',board).forEach(countUp)}};
   addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});update();
 }
@@ -60,11 +61,23 @@ function pathRunner(section){
   addEventListener('resize',()=>{measure();last=-1;update()});measure();update();
 }
 
+// Hero: step one enquiry through the business. Each step lights a person, the line to
+// them and Imbleo's hand-off; the last step holds, then the story starts again.
+function heroFlow(el){
+  const n=$$('.pc',el).length,parts=[...Array(n)].map((_,i)=>$$(`[data-i="${i}"]`,el));
+  const set=step=>parts.forEach((ps,i)=>ps.forEach(p=>{p.classList.toggle('active',i===step);p.classList.toggle('done',i<step);p.classList.toggle('on',i===Math.min(step,n-1))}));
+  if(reduced){set(n);return}
+  let step=0;set(0);
+  const tick=()=>{if(el.classList.contains('playing')&&!document.hidden){step=step>=n?0:step+1;set(step)}setTimeout(tick,step>=n?2800:2100)};
+  setTimeout(tick,2100);
+}
+
 export function init(){
   window.__imbleoMotion=true;document.documentElement.classList.add('motion-ready');
   $$('[data-split]').forEach(splitWords);
   const revealTargets=$$('[data-reveal],[data-split],[data-flow],[data-stages],.anatomy-feature,.case-art,.logo-strip,.orch');
   $$('[data-partner]').forEach(partner);
+  $$('[data-hflow]').forEach(heroFlow);
   if(reduced||!('IntersectionObserver' in window)){revealTargets.forEach(el=>{el.classList.add('in');if(el.matches('[data-split]'))el.classList.add('split-done')});$$('[data-path]').forEach(el=>el.closest('section')&&pathRunner(el.closest('section')));return}
   const once=new IntersectionObserver(entries=>entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add('in');once.unobserve(el);
     if(el.matches('[data-split]'))settleSplit(el);
@@ -74,6 +87,6 @@ export function init(){
   // Looping 2D animations (CSS and SVG SMIL motion) only run while on screen.
   const live=new IntersectionObserver(entries=>entries.forEach(e=>{const el=e.target;el.classList.toggle('playing',e.isIntersecting);
     [el,...$$('svg',el)].forEach(s=>{if(s.pauseAnimations&&s.querySelector&&s.querySelector('animateMotion'))e.isIntersecting?s.unpauseAnimations():s.pauseAnimations()});}),{rootMargin:'60px'});
-  $$('.case-art,.anat,.partner-board,.logo-wall,.orch').forEach(el=>live.observe(el));
+  $$('.case-art,.anat,.partner-board,.logo-wall,.orch,.case-cloud').forEach(el=>live.observe(el));
   $$('[data-path]').forEach(el=>pathRunner(el.closest('section')));
 }

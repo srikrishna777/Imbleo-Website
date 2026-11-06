@@ -11,7 +11,7 @@ const paths = {
  chart:'<path d="M4 3v17h17M8 16v-5m5 5V7m5 9v-3"/>',
  sparkles:'<path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3ZM20 2v4m-2-2h4"/>',
  layout:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 9v12"/>',
- users:'<circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 5a3 3 0 0 1 0 6m1 4a5 5 0 0 1 3 5"/>',
+ users:'<g fill="currentColor" stroke="none"><circle cx="12" cy="7.3" r="3.8"/><path d="M5.4 20.4a6.6 6.6 0 0 1 13.2 0Z"/><circle cx="4.6" cy="9.3" r="2.8"/><circle cx="19.4" cy="9.3" r="2.8"/><path d="M.4 20c0-3.4 1.8-6 4.4-6 .8 0 1.5.2 2.1.6A7.8 7.8 0 0 0 4.2 20Z"/><path d="M23.6 20c0-3.4-1.8-6-4.4-6-.8 0-1.5.2-2.1.6a7.8 7.8 0 0 1 2.7 5.4Z"/></g>',
  check:'<path d="m5 12 4 4L19 6"/>',
  cursor:'<path d="m4 3 7 18 2-8 8-2L4 3Z"/>',
  plus:'<path d="M12 5v14M5 12h14"/>',
@@ -22,7 +22,7 @@ const paths = {
  close:'<path d="m6 6 12 12M6 18 18 6"/>',
  megaphone:'<path d="M3 9h5l11-5v16L8 15H3V9Zm5 6 2 6H6l-2-6m16-8 2-1m-2 11 2 1"/>',
  mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/>',
- link:'<path d="m10 13 4-4m-6 6-2 2a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m4-2 2-2a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" transform="translate(1 1)"/>',
+ link:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
  globe:'<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/>',
  building:'<path d="M4 21V3h12v18m0-13h4v13M2 21h20M8 7h4M8 11h4M8 15h4M8 21v-3h4v3"/>',
  shield:'<path d="m12 2 9 4v6c0 5-5 8-9 10-4-2-9-5-9-10V6l9-4Z"/><path d="m8 12 3 3 5-6"/>',
@@ -41,6 +41,17 @@ const paths = {
  bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2ZM10 20a2 2 0 0 0 4 0"/>',
  lock:'<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/>',
  send:'<path d="M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z"/>',
+ /* Service icons, matched to the services deck */
+ discover:'<circle cx="10" cy="10" r="6"/><path d="M14.5 14.5 20 20M7 10h6M10 7v6"/>',
+ architecture:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="8.5" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v2h11v-2M12 12v2"/>',
+ funnel:'<path d="M3 5h18l-6 7v6l-6 2v-8z"/>',
+ implement:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11M11 13h7M11 16h5"/>',
+ integrate:'<circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M7.5 12c4 0 5-6 9-6M7.5 12c4 0 5 6 9 6"/>',
+ migrate:'<ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V6M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/>',
+ report:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+ 'ai-ops':'<path d="m12 3 1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="m18 15 .8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+ 'custom-app':'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h5M14 16l2 2 3-4"/>',
+ adopt:'<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c.8-3.6 2.8-5.5 5-5.5s4.2 1.9 5 5.5M14 19.5c.5-2.6 1.7-4 3-4s2.5 1.4 3 4"/>',
  pen:'<path d="M15 4l5 5L9 20H4v-5L15 4Z"/>'
 };
 export function icon(name, cls='') {return `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name]||paths.cube}</svg>`;}
