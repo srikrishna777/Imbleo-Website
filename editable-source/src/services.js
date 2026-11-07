@@ -37,14 +37,7 @@ export const tools = [
 export const servicesPage = {
   hero: {
     title: ['Ten ways to make', 'the business run better.'],
-    lede: 'Most engagements combine several of these. We can start with discovery or an audit, own the design and build, deliver one focused integration, or bring AI into a specific workflow.',
-    jump: [
-      {id: 'explorer', label: 'What we do'},
-      {id: 'deliver', label: 'How we deliver'},
-      {id: 'ai', label: 'Practical AI'},
-      {id: 'migration', label: 'Data migration'},
-      {id: 'platforms', label: 'Platforms'}
-    ]
+    lede: 'Most engagements combine several of these. We can start with discovery or an audit, own the design and build, deliver one focused integration, or bring AI into a specific workflow.'
   },
   explorer: {
     items: [

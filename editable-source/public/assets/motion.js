@@ -38,7 +38,7 @@ function partner(board){
     if(r.bottom<-300||r.top>vh+300)return;
     const cards=$$('.pcard',board),stacked=cards.length>2&&cards[2].getBoundingClientRect().top-cards[0].getBoundingClientRect().top>40;
     if(stacked)steps.forEach((s,i)=>board.classList.toggle(s,cards[i].getBoundingClientRect().top<vh*0.8));
-    else{const p=(vh*0.94-r.top)/(vh*0.5);steps.forEach((s,i)=>board.classList.toggle(s,p>=0.06+i*0.2));}
+    else{const p=(vh*0.94-r.top)/(vh*0.62);steps.forEach((s,i)=>board.classList.toggle(s,p>=0.06+i*0.25));}
     if(!counted&&board.classList.contains('s2')){counted=true;$$('[data-count]',board).forEach(countUp)}};
   addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});update();
 }
@@ -87,6 +87,6 @@ export function init(){
   // Looping 2D animations (CSS and SVG SMIL motion) only run while on screen.
   const live=new IntersectionObserver(entries=>entries.forEach(e=>{const el=e.target;el.classList.toggle('playing',e.isIntersecting);
     [el,...$$('svg',el)].forEach(s=>{if(s.pauseAnimations&&s.querySelector&&s.querySelector('animateMotion'))e.isIntersecting?s.unpauseAnimations():s.pauseAnimations()});}),{rootMargin:'60px'});
-  $$('.case-art,.anat,.partner-board,.orch').forEach(el=>live.observe(el));
+  $$('.case-art,.anat,.partner-board,.orch,.sysmap,.case-flow,.before-after').forEach(el=>live.observe(el));
   $$('[data-path]').forEach(el=>pathRunner(el.closest('section')));
 }

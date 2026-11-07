@@ -16,14 +16,18 @@ if($('[data-explore-tab]')){
 // Footer service links remember which service to open on /services/.
 $$('[data-explore-link]').forEach(a=>a.addEventListener('click',()=>{if($('[data-explore-tab]'))selectExplore(a.dataset.exploreLink);else try{sessionStorage.setItem('imbleo-explore',a.dataset.exploreLink)}catch{}}));
 
-/* Homepage case-study carousel. */
+/* Homepage case-study carousel: swipe, drag with the mouse, or use the arrow keys. A slim bar shows the position. */
 const carousel=$('[data-carousel]');
-if(carousel){const track=$('.car-track',carousel),prev=$('.prev',carousel),next=$('.next',carousel);
+if(carousel){const track=$('.car-track',carousel),bar=$('.car-progress i',carousel);
  const step=()=>{const card=$('.case-card',track);return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(track).columnGap||0):track.clientWidth};
- const sync=()=>{prev.disabled=track.scrollLeft<=4;next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-4};
- prev.addEventListener('click',()=>track.scrollBy({left:-step(),behavior:reduced?'auto':'smooth'}));
- next.addEventListener('click',()=>track.scrollBy({left:step(),behavior:reduced?'auto':'smooth'}));
- track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();next.click()}if(e.key==='ArrowLeft'){e.preventDefault();prev.click()}});
+ const sync=()=>{const max=track.scrollWidth-track.clientWidth,share=track.clientWidth/track.scrollWidth;bar.style.width=(share*100).toFixed(2)+'%';bar.style.transform=`translateX(${max>0?(track.scrollLeft/max)*(1/share-1)*100:0}%)`;};
+ track.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();track.scrollBy({left:(e.key==='ArrowRight'?1:-1)*step(),behavior:reduced?'auto':'smooth'})}});
+ let drag=null,moved=false;
+ track.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;drag={x:e.clientX,left:track.scrollLeft};moved=false;});
+ addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x;if(!moved&&Math.abs(dx)>6){moved=true;track.classList.add('dragging');}if(moved)track.scrollLeft=drag.left-dx;});
+ addEventListener('pointerup',()=>{if(!drag)return;drag=null;if(moved){track.classList.remove('dragging');const s=step(),to=Math.round(track.scrollLeft/s)*s;track.scrollTo({left:to,behavior:reduced?'auto':'smooth'});}});
+ track.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false;}},true);
+ track.addEventListener('dragstart',e=>e.preventDefault());
  let t;track.addEventListener('scroll',()=>{cancelAnimationFrame(t);t=requestAnimationFrame(sync)},{passive:true});addEventListener('resize',sync);sync();
 }
 
@@ -40,8 +44,18 @@ $('#download-brief')?.addEventListener('click',()=>{const url=URL.createObjectUR
 function toast(message){const el=$('#toast');el.textContent=message;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),4000)}
 
 /* 2D motion, loaded per page. */
-import('./motion.js').then(m=>m.init());
+/* Intro loader (IMBLEO words), once per visit. Page motion starts as it lifts. */
+const loaderEl=$('#loader'),root=document.documentElement;
+const intro=new Promise(done=>{
+ if(!loaderEl||!root.classList.contains('intro')){loaderEl?.remove();return done();}
+ let ended=false;
+ const end=()=>{if(ended)return;ended=true;try{sessionStorage.setItem('imbleo-intro','1')}catch(e){}
+  loaderEl.classList.add('loader-done');done();setTimeout(()=>{loaderEl.remove();root.classList.remove('intro','intro-run')},600);};
+ root.classList.add('intro-run');
+ import('./wordcycle.js').then(m=>m.wordCycle($('[data-word-cycle]',loaderEl))).then(()=>setTimeout(end,350),end);
+ loaderEl.addEventListener('click',end);addEventListener('keydown',end,{once:true});setTimeout(end,7500);
+});
+intro.then(()=>import('./motion.js').then(m=>m.init()));
 const think=$('[data-think]');if(think)import('./sketch.js').then(m=>m.init(think));
 const tools=$('[data-tools]');if(tools)import('./tools.js').then(m=>m.init(tools));
-const cycle=$('[data-word-cycle]');if(cycle)import('./wordcycle.js').then(m=>m.init());
 const storyEl=$('[data-story]');if(storyEl)import('./story.js').then(m=>m.init(storyEl));

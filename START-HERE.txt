@@ -27,15 +27,17 @@ whether the work was delivered, partly delivered, a design or a prototype, and
 metric notes are retained. Status labels are not shown as badges.
 Mock interfaces are clearly illustrative and use fictional sample data.
 
-The homepage does not mention Zoho (npm run check enforces this).
-Under the hero is the IMBLEO word cycle (Intelligence Meets Business,
-Listen, Engineer, Own), one word at a time.
+The homepage copy does not mention Zoho (npm run check enforces this). The
+Tools disc shows the Zoho logo among the platform logos, as requested in 5.0.
+Platform logos are original brand artwork in assets/logos/.
+The IMBLEO words (Intelligence Meets Business, Listen, Engineer, Own) play
+once as the intro loader on the first page of a visit, then the site appears.
 The original logo file is editable-source/public/assets/logo.jpeg.
 
 CHECKS
 Passed: JavaScript syntax, 16 page routes, asset and module links, fragment links,
 ARIA references, original metric qualifications, and the Zoho-free homepage.
 Browser checks (Chromium): desktop and phone layouts, scroll animations,
-hero story, IMBLEO word cycle, carousel and case preview row, explorer tabs and
+hero story, intro loader, carousel and case preview row, case system maps, explorer tabs and
 flip tiles, platform logos, contact dialog, reduced motion, no console
 errors or failed requests on any page, and frame-rate checks.
